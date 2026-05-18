@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fit N Blaze Admin Dashboard – Overview">
+  <title>Dashboard | Fit N Blaze Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Sidebar Overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon" style="background: transparent; box-shadow: none;"><img src="../assets/FNB%20logo.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;"></div>
+      <div class="logo-text">
+        FIT <span>'N'</span> BLAZE
+        <span class="logo-badge">Admin Panel</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Main</span>
+      <ul>
+        <li>
+          <a href="dashboard.html" class="active" id="nav-dashboard">
+            <i class="fa-solid fa-gauge-high"></i>
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="members.html" id="nav-members">
+            <i class="fa-solid fa-users"></i>
+            Members
+          </a>
+        </li>
+        <li>
+          <a href="trainers.html" id="nav-trainers">
+            <i class="fa-solid fa-dumbbell"></i>
+            Trainers
+          </a>
+        </li>
+        <li>
+          <a href="payments.html" id="nav-payments">
+            <i class="fa-solid fa-credit-card"></i>
+            Payments
+          </a>
+        </li>
+
+      </ul>
+
+      <span class="nav-section-label">General</span>
+      <ul>
+        <li>
+          <a href="../index.html">
+            <i class="fa-solid fa-globe"></i>
+            View Website
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="#" id="logoutLink">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Logout
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========== MAIN ========== -->
+  <div class="admin-main">
+
+    <!-- Header -->
+    <header class="admin-header">
+      <div class="header-left">
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <span class="header-page-title">Dashboard Overview</span>
+      </div>
+      <div class="header-right">
+        <span class="header-date" id="headerDate"></span>
+        <div class="header-avatar" title="Admin">GV</div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="admin-content">
+
+      <!-- Page Title -->
+      <div class="page-title-block">
+        <div class="breadcrumb">Admin / <span>Dashboard</span></div>
+        <h1>Welcome back 👋</h1>
+        <p>Here's what's happening at Fit N Blaze today.</p>
+      </div>
+ 
+      <!-- Alert Strip -->
+      <div class="alert-strip" style="display:none;">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Loading membership status...</span>
+      </div>
+ 
+      <!-- Stats Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="stat-label">Total Members</div>
+          <div class="stat-value"
+               id="stat-total-members"
+               data-count="0"
+               data-prefix=""
+               data-suffix="">0</div>
+          <div class="stat-change up"><i class="fa-solid fa-arrow-trend-up"></i> Live updates</div>
+        </div>
+ 
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-user-check"></i></div>
+          <div class="stat-label">Active Members</div>
+          <div class="stat-value"
+               id="stat-active-members"
+               data-count="0"
+               data-prefix=""
+               data-suffix="">0</div>
+          <div class="stat-change up"><i class="fa-solid fa-arrow-trend-up"></i> Live updates</div>
+        </div>
+ 
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-user-xmark"></i></div>
+          <div class="stat-label">Expired Members</div>
+          <div class="stat-value"
+               id="stat-expired-members"
+               data-count="0"
+               data-prefix=""
+               data-suffix="">0</div>
+          <div class="stat-change down"><i class="fa-solid fa-arrow-trend-down"></i> Live updates</div>
+        </div>
+ 
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+          <div class="stat-label">Monthly Revenue</div>
+          <div class="stat-value"
+               id="stat-monthly-revenue"
+               data-count="0"
+               data-prefix="₹"
+               data-suffix="">₹0</div>
+          <div class="stat-change up"><i class="fa-solid fa-arrow-trend-up"></i> Current Month</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon" style="background: rgba(74, 222, 128, 0.1); border-color: rgba(74, 222, 128, 0.3); color: #4ade80;"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="stat-label">Yearly Revenue</div>
+          <div class="stat-value"
+               id="stat-yearly-revenue"
+               data-count="0"
+               data-prefix="₹"
+               data-suffix="">₹0</div>
+          <div class="stat-change up"><i class="fa-solid fa-arrow-trend-up"></i> Calendar Year</div>
+        </div>
+      </div>
+
+      <!-- 2-col row -->
+      <div class="dashboard-2col">
+        <!-- Recent Members Table -->
+        <div class="section-card">
+          <div class="section-card-header">
+            <h2><i class="fa-solid fa-user-clock text-accent" style="margin-right:8px"></i>Recent Members</h2>
+            <a href="members.html" class="btn-admin btn-admin-ghost">View All <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="section-card-body">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Plan</th>
+                  <th>Status</th>
+                  <th>Joined</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="4" style="text-align:center;padding:25px;color:#888;">
+                    <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i> Loading recent members...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Quick Actions + Revenue Breakdown -->
+        <div style="display:flex;flex-direction:column;gap:20px;">
+          <!-- Quick Actions -->
+          <div class="section-card">
+            <div class="section-card-header">
+              <h2><i class="fa-solid fa-bolt text-accent" style="margin-right:8px"></i>Quick Actions</h2>
+            </div>
+            <div class="section-card-body">
+              <div class="quick-actions-list">
+                <a href="members.html" class="quick-action-btn">
+                  <i class="fa-solid fa-user-plus"></i>
+                  Add New Member
+                </a>
+                <a href="payments.html" class="quick-action-btn">
+                  <i class="fa-solid fa-receipt"></i>
+                  Record Payment
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Revenue by Plan -->
+          <div class="section-card">
+            <div class="section-card-header">
+              <h2><i class="fa-solid fa-chart-pie text-accent" style="margin-right:8px"></i>Revenue by Plan</h2>
+            </div>
+            <div class="section-card-body">
+              <div class="mini-stat-list" id="revenue-by-plan-list">
+                <div style="text-align:center;padding:25px;color:#888;">
+                  <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i> Loading plan breakdown...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expiring Soon -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <h2><i class="fa-solid fa-hourglass-half text-accent" style="margin-right:8px"></i>Memberships Expiring Soon</h2>
+          <span class="badge badge-expired">0 Members</span>
+        </div>
+        <div class="section-card-body">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Member</th>
+                <th>Plan</th>
+                <th>Expiry Date</th>
+                <th>Days Left</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="4" style="text-align:center;padding:25px;color:#888;">
+                  <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i> Loading expiring memberships...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.admin-main -->
+
+  <!-- Backend Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

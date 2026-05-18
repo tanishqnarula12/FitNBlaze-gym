@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Member | Fit 'N' Blaze Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin-forms.css">
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Admin Navbar -->
+    <nav class="admin-navbar">
+        <a href="members.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+        <div class="logo">FIT<span>'N'</span>BLAZE</div>
+    </nav>
+
+    <div class="form-container">
+        
+        <header class="page-header">
+            <h1>Add New Member</h1>
+            <p>Create a new member account and activate their fitness journey.</p>
+        </header>
+
+        <form id="addMemberForm">
+            
+            <!-- Section 1: Personal Details -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-user"></i> Personal Details</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" placeholder="e.g. Rahul Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="rahul@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth <span class="required">*</span></label>
+                        <input type="date" id="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender <span class="required">*</span></label>
+                        <select id="gender" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Fitness Profile -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-dumbbell"></i> Fitness Profile</h2>
+                
+                <div class="form-group full-width">
+                    <label>Primary Goal <span class="required">*</span></label>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="goal" value="Fat Loss" required>
+                            <span>Fat Loss</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="goal" value="Muscle Gain">
+                            <span>Muscle Gain</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="goal" value="Weight Management">
+                            <span>Weight Management</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="goal" value="Strength Training">
+                            <span>Strength</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-grid" style="margin-top: 1.5rem;">
+                    <div class="form-group">
+                        <label>Current Weight (kg)</label>
+                        <input type="number" id="currentWeight" placeholder="e.g. 75">
+                    </div>
+                    <div class="form-group">
+                        <label>Target Weight (kg)</label>
+                        <input type="number" id="targetWeight" placeholder="e.g. 68">
+                    </div>
+                    <div class="form-group">
+                        <label>Height (cm)</label>
+                        <input type="number" id="height" placeholder="e.g. 175">
+                    </div>
+                    <div class="form-group">
+                        <label>Training Experience</label>
+                        <select id="experience">
+                            <option value="Beginner" selected>Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advanced">Advanced</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Preferences & Health -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-heart-pulse"></i> Preferences & Health</h2>
+                
+                <div class="form-group full-width">
+                    <label>Preferred Training Type</label>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="checkbox" name="trainingType" value="Gym / Cardio">
+                            <span>Gym / Cardio</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="checkbox" name="trainingType" value="MMA / Boxing">
+                            <span>MMA / Boxing</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="checkbox" name="trainingType" value="Yoga">
+                            <span>Yoga</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="checkbox" name="trainingType" value="CrossFit">
+                            <span>CrossFit</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="checkbox" name="trainingType" value="Self Defence">
+                            <span>Self Defence</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="checkbox" name="trainingType" value="Dance / Zumba">
+                            <span>Dance / Zumba</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-grid" style="margin-top: 1.5rem;">
+                    <div class="form-group full-width">
+                        <label>Medical Conditions / Injuries</label>
+                        <textarea id="medical" placeholder="Asthma, BP, previous injuries..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Dietary Preferences</label>
+                        <select id="dietary">
+                            <option value="None">No specific preference</option>
+                            <option value="Vegetarian">Vegetarian</option>
+                            <option value="Non-Vegetarian">Non-Vegetarian</option>
+                            <option value="Vegan">Vegan</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Membership Details -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-id-card"></i> Membership Details</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Select Plan <span class="required">*</span></label>
+                        <select id="planSelect" required>
+                            <option value="" disabled selected>Choose a Plan...</option>
+                            <option value="1 Month (Gym & Cardio)" data-price="2999" data-duration="30 Days">1 Month (Gym & Cardio) — ₹2,999</option>
+                            <option value="3 Months (Gym & Cardio)" data-price="6999" data-duration="90 Days">3 Months (Gym & Cardio) — ₹6,999</option>
+                            <option value="6 Months (Gym & Cardio)" data-price="9999" data-duration="180 Days">6 Months (Gym & Cardio) — ₹9,999</option>
+                            <option value="1 Year (Gym & Cardio)" data-price="14999" data-duration="365 Days">1 Year (Gym & Cardio) — ₹14,999</option>
+                            <option value="Group Classes (1 Month)" data-price="2499" data-duration="30 Days">Group Classes (1 Month) — ₹2,499</option>
+                            <option value="Yoga Class (1 Month)" data-price="2499" data-duration="30 Days">Yoga Class (1 Month) — ₹2,499</option>
+                            <option value="Yoga Class (3 Months)" data-price="4599" data-duration="90 Days">Yoga Class (3 Months) — ₹4,599</option>
+                            <option value="Personal Training (Per Day)" data-price="250" data-duration="1 Day">Personal Training (Per Day) — ₹250</option>
+                            <option value="Group Session (Fitness Boxing / PT)" data-price="4999" data-duration="30 Days">Group Session — ₹4,999</option>
+                            <option value="Personal One-on-One (Fitness Boxing / PT)" data-price="9999" data-duration="30 Days">Personal One-on-One — ₹9,999</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Membership Start Date <span class="required">*</span></label>
+                        <input type="date" id="startDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Membership Duration</label>
+                        <input type="text" id="duration" readonly placeholder="Auto-filled from plan" style="background: rgba(255,255,255,0.02); border-style: dashed;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Assigned Trainer</label>
+                        <select id="trainerAssigned">
+                            <option value="">No Trainer (Self Workout)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Account Status <span class="required">*</span></label>
+                        <select id="accountStatus" required>
+                            <option value="Active" selected>Active</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Payment Details -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-indian-rupee-sign"></i> Payment Details</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Payment Method <span class="required">*</span></label>
+                        <select id="paymentMethod" required>
+                            <option value="" disabled selected>Select Method</option>
+                            <option value="Cash">Cash</option>
+                            <option value="UPI">UPI</option>
+                            <option value="Online">Online / Card</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Amount Paid (₹) <span class="required">*</span></label>
+                        <input type="number" id="amountPaid" placeholder="0" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Payment Status <span class="required">*</span></label>
+                        <select id="paymentStatus" required>
+                            <option value="Paid" selected>Paid</option>
+                            <option value="Partial">Partial</option>
+                            <option value="Pending">Pending</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Transaction Reference</label>
+                        <input type="text" id="transactionRef" placeholder="UPI Ref / Receipt No.">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Account Summary -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-shield-halved"></i> Account Summary</h2>
+                
+                <div class="summary-box">
+                    <div class="summary-item">
+                        <span class="summary-label">Generated Member ID</span>
+                        <span class="summary-value highlight" id="generatedMemberId">FNB---</span>
+                    </div>
+                    <div class="summary-item" style="text-align: right;">
+                        <span class="summary-label">Login Method</span>
+                        <span class="summary-value" style="font-size: 1.1rem; font-family: 'Poppins', sans-serif;">Member ID + Phone</span>
+                    </div>
+                </div>
+            </section>
+
+        </form>
+    </div>
+
+    <!-- Sticky Action Bar -->
+    <div class="sticky-action-bar" id="actionBar" style="justify-content: flex-end;">
+        <button type="button" class="btn btn-primary" id="btnSubmitMember">Create Member Account <i class="fa-solid fa-check"></i></button>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="success-modal">
+            <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h2>Member Added!</h2>
+            <p>The account has been created successfully.</p>
+            <button class="btn btn-primary" onclick="window.location.href='members.html'">Go to Members List</button>
+        </div>
+    </div>
+
+    <!-- Backend Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin-forms.js"></script>
+    <script>
+        // Init Member specific logic
+        document.addEventListener('DOMContentLoaded', () => {
+            initMemberForm();
+        });
+    </script>
+</body>
+</html>

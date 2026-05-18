@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Us | Fit 'N' Blaze</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/join.css">
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-overlay"></div>
+
+    <div class="join-container">
+        
+        <!-- Header -->
+        <header class="join-header">
+            <a href="../index.html" class="logo">
+                FIT<span>'N'</span>BLAZE
+            </a>
+            <div class="header-titles">
+                <h1>Start Your Transformation</h1>
+                <p>Complete your fitness profile and join the Fit 'N' Blaze community.</p>
+            </div>
+        </header>
+
+        <!-- Progress Indicator -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+            <div class="step-indicators">
+                <div class="step-indicator active" data-step="1">1</div>
+                <div class="step-indicator" data-step="2">2</div>
+                <div class="step-indicator" data-step="3">3</div>
+                <div class="step-indicator" data-step="4">4</div>
+                <div class="step-indicator" data-step="5">5</div>
+            </div>
+            <div class="step-labels">
+                <span>Personal</span>
+                <span>Fitness</span>
+                <span>Health</span>
+                <span>Plan</span>
+                <span>Review</span>
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-card">
+            <form id="joinForm">
+                
+                <!-- STEP 1: Personal Details -->
+                <div class="form-step active" data-step="1">
+                    <h2 class="step-title">Personal Details</h2>
+                    <p class="step-subtitle">Let's get to know you.</p>
+
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label>Full Name *</label>
+                            <input type="text" id="fullName" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" id="phone" placeholder="9876543210" pattern="[0-9]{10}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="email" placeholder="john@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth *</label>
+                            <input type="date" id="dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender *</label>
+                            <select id="gender" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Fitness Profile -->
+                <div class="form-step" data-step="2">
+                    <h2 class="step-title">Fitness Profile</h2>
+                    <p class="step-subtitle">Tell us about your current status and goals.</p>
+
+                    <div class="form-group full-width">
+                        <label>Primary Goal *</label>
+                        <div class="radio-grid">
+                            <label class="radio-card">
+                                <input type="radio" name="goal" value="Fat Loss" required>
+                                <span>Fat Loss</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="goal" value="Muscle Gain">
+                                <span>Muscle Gain</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="goal" value="Weight Management">
+                                <span>Weight Management</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="goal" value="Strength Training">
+                                <span>Strength</span>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="goal" value="General Fitness">
+                                <span>General Fitness</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Current Weight (kg) *</label>
+                            <input type="number" id="currentWeight" placeholder="e.g. 75" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Target Weight (kg) *</label>
+                            <input type="number" id="targetWeight" placeholder="e.g. 68" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Height (cm) *</label>
+                            <input type="number" id="height" placeholder="e.g. 175" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Training Experience *</label>
+                            <select id="experience" required>
+                                <option value="" disabled selected>Select Level</option>
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Preferences & Health -->
+                <div class="form-step" data-step="3">
+                    <h2 class="step-title">Preferences & Health</h2>
+                    <p class="step-subtitle">Customize your training experience safely.</p>
+
+                    <div class="form-group full-width">
+                        <label>Preferred Training Type *</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="trainingType" value="Gym Training">
+                                <span>Gym Training</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="trainingType" value="MMA">
+                                <span>MMA</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="trainingType" value="Boxing">
+                                <span>Boxing</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="trainingType" value="Yoga">
+                                <span>Yoga</span>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" name="trainingType" value="Zumba">
+                                <span>Zumba</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Medical Conditions / Injuries</label>
+                        <textarea id="medical" placeholder="Any past injuries, asthma, BP issues? (Leave blank if none)" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Dietary Preferences</label>
+                        <select id="dietary">
+                            <option value="None">No specific preference</option>
+                            <option value="Vegetarian">Vegetarian</option>
+                            <option value="Non-Vegetarian">Non-Vegetarian</option>
+                            <option value="Vegan">Vegan</option>
+                            <option value="Eggetarian">Eggetarian</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Membership Summary -->
+                <div class="form-step" data-step="4">
+                    <h2 class="step-title">Membership Summary</h2>
+                    <p class="step-subtitle">Review your selected plan.</p>
+
+                    <div class="plan-summary-card">
+                        <div class="plan-header">
+                            <h3 id="planName">3 Month Transformation</h3>
+                            <span class="plan-price" id="planPrice">₹6,999</span>
+                        </div>
+                        <div class="plan-duration">Duration: <span id="planDuration">90 Days</span></div>
+                        
+                        <div class="plan-benefits">
+                            <h4>Benefits Included:</h4>
+                            <ul id="planBenefitsList">
+                                <li><i class="fa-solid fa-check"></i> Personalized workout plan</li>
+                                <li><i class="fa-solid fa-check"></i> Trainer support</li>
+                                <li><i class="fa-solid fa-check"></i> Progress tracking</li>
+                                <li><i class="fa-solid fa-check"></i> Access to member dashboard</li>
+                                <li><i class="fa-solid fa-check"></i> Nutrition guidance</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="terms-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="termsCheck" name="terms" required>
+                            <span class="checkmark"></span>
+                            I acknowledge and agree to the Gym's Terms & Conditions and safety protocols.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- STEP 5: Final Review -->
+                <div class="form-step" data-step="5">
+                    <h2 class="step-title">Final Review</h2>
+                    <p class="step-subtitle">You're one step away from transforming your fitness journey.</p>
+
+                    <div class="review-grid">
+                        <!-- Filled via JS -->
+                    </div>
+
+                    <div class="review-total">
+                        <span>Total Payable:</span>
+                        <span class="total-amount">₹6,999</span>
+                    </div>
+
+                    <div class="form-buttons final-cta">
+                        <button type="button" class="btn-prev btn-outline"><i class="fa-solid fa-arrow-left"></i> Back</button>
+                        <button type="button" class="btn-payment btn-primary" id="proceedPaymentBtn">Proceed to Payment <i class="fa-solid fa-lock"></i></button>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons (Steps 1-4) -->
+                <div class="form-buttons nav-buttons" id="navButtons">
+                    <button type="button" class="btn-prev btn-outline" style="visibility: hidden;">Back</button>
+                    <button type="button" class="btn-next btn-primary">Continue</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <!-- Success Modal Overlay (Mock Payment) -->
+    <div class="modal-overlay" id="paymentModal">
+        <div class="success-modal">
+            <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h2>Payment Successful!</h2>
+            <p>Welcome to Fit 'N' Blaze.</p>
+            <div class="member-id-reveal">
+                <span>Your Member ID:</span>
+                <strong id="newMemberId">FNB023</strong>
+            </div>
+            <p class="sub-text">Use this ID and your registered phone number to log into the Member Dashboard.</p>
+            <button class="btn-primary" onclick="window.location.href='login.html'">Go to Login</button>
+        </div>
+    </div>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Backend Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/join.js"></script>
+</body>
+</html>

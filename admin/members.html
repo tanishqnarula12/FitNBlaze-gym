@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fit N Blaze Admin – Members Management">
+  <title>Members | Fit N Blaze Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon" style="background: transparent; box-shadow: none;"><img src="../assets/FNB%20logo.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;"></div>
+      <div class="logo-text">
+        FIT <span>'N'</span> BLAZE
+        <span class="logo-badge">Admin Panel</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Main</span>
+      <ul>
+        <li><a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i>Dashboard</a></li>
+        <li><a href="members.html" class="active"><i class="fa-solid fa-users"></i>Members</a></li>
+        <li><a href="trainers.html"><i class="fa-solid fa-dumbbell"></i>Trainers</a></li>
+        <li><a href="payments.html"><i class="fa-solid fa-credit-card"></i>Payments</a></li>
+      </ul>
+      <span class="nav-section-label">General</span>
+      <ul>
+        <li><a href="../index.html"><i class="fa-solid fa-globe"></i>View Website</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" id="logoutLink"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+    <header class="admin-header">
+      <div class="header-left">
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <span class="header-page-title">Members</span>
+      </div>
+      <div class="header-right">
+        <span class="header-date" id="headerDate"></span>
+        <div class="header-avatar" title="Admin">GV</div>
+      </div>
+    </header>
+
+    <main class="admin-content">
+
+      <div class="page-title-block">
+        <div class="breadcrumb">Admin / <span>Members</span></div>
+        <h1>Members Management</h1>
+        <p>View and manage all gym members and their membership status.</p>
+      </div>
+
+      <!-- Summary mini-stats -->
+      <div class="stats-grid stats-grid-3">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+          <div class="stat-label">Total Members</div>
+          <div class="stat-value" data-count="0">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-user-check"></i></div>
+          <div class="stat-label">Active</div>
+          <div class="stat-value" data-count="0">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-user-xmark"></i></div>
+          <div class="stat-label">Expired</div>
+          <div class="stat-value" data-count="0">0</div>
+        </div>
+      </div>
+
+      <!-- Table Card -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <h2><i class="fa-solid fa-table-list text-accent" style="margin-right:8px"></i>All Members</h2>
+          <button class="btn-admin btn-admin-primary" onclick="window.location.href='add-member.html'">
+            <i class="fa-solid fa-user-plus"></i> Add Member
+          </button>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="table-toolbar">
+          <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="tableSearch" placeholder="Search member name, plan…">
+          </div>
+          <div class="filter-group">
+            <select class="filter-select" id="statusFilter">
+              <option value="">All Status</option>
+              <option value="active">Active</option>
+              <option value="expired">Expired</option>
+            </select>
+            <select class="filter-select" id="planFilter">
+              <option value="">All Plans</option>
+              <option value="1 Month">1 Month</option>
+              <option value="3 Month">3 Month</option>
+              <option value="12 Month">12 Month</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section-card-body">
+          <table class="admin-table" id="mainTable">
+            <thead>
+              <tr>
+                <th>#ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Plan</th>
+                <th>Status</th>
+                <th>Expiry Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dynamically populated by admin.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer" id="membersTableFooter">
+          <span id="membersCount">Loading...</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Renew Membership Modal -->
+  <div class="modal-overlay" id="renewModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:36px 32px;max-width:440px;width:90%;position:relative;">
+      <button id="closeRenewModal" style="position:absolute;top:14px;right:18px;background:none;border:none;color:#888;font-size:20px;cursor:pointer;">&times;</button>
+      <h2 style="color:#fff;font-size:1.4rem;margin:0 0 4px 0;font-weight:700;"><i class="fa-solid fa-rotate" style="color:#e63946;margin-right:8px;"></i>Renew Membership</h2>
+      <p style="color:#888;font-size:0.85rem;margin:0 0 24px 0;" id="renewMemberLabel">Member: ---</p>
+
+      <label style="display:block;color:#aaa;font-size:0.8rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Select Plan</label>
+      <select id="renewPlanSelect" style="width:100%;padding:12px 14px;background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:10px;color:#fff;font-size:0.95rem;margin-bottom:20px;outline:none;">
+        <option value="" disabled selected>Loading plans...</option>
+      </select>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-top:1px solid rgba(255,255,255,0.06);margin-bottom:20px;">
+        <span style="color:#888;font-size:0.9rem;">Amount to Pay</span>
+        <span style="color:#e63946;font-weight:800;font-size:1.3rem;" id="renewAmount">₹0</span>
+      </div>
+
+      <div style="display:flex;gap:12px;">
+        <button id="renewOfflineBtn" style="flex:1;padding:14px;background:#2a2a2a;color:#fff;font-size:1rem;font-weight:700;border:1px solid rgba(255,255,255,0.1);border-radius:12px;cursor:pointer;transition:all 0.2s;">
+          <i class="fa-solid fa-money-bill" style="margin-right:6px;"></i> Offline (Cash)
+        </button>
+        <button id="renewPayBtn" style="flex:1;padding:14px;background:linear-gradient(135deg,#e63946,#c0222f);color:#fff;font-size:1rem;font-weight:700;border:none;border-radius:12px;cursor:pointer;transition:all 0.2s;">
+          <i class="fa-solid fa-indian-rupee-sign" style="margin-right:6px;"></i> Online
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Member Modal -->
+  <div class="modal-overlay" id="editMemberModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:32px;max-width:480px;width:90%;position:relative;max-height:90vh;overflow-y:auto;box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+      <button id="closeEditMemberModal" style="position:absolute;top:14px;right:18px;background:none;border:none;color:#888;font-size:20px;cursor:pointer;">&times;</button>
+      <h2 style="color:#fff;font-size:1.4rem;margin:0 0 4px 0;font-weight:700;"><i class="fa-solid fa-user-pen" style="color:#e63946;margin-right:8px;"></i>Edit Member Details</h2>
+      <p style="color:#888;font-size:0.85rem;margin:0 0 20px 0;" id="editMemberLabel">Member ID: ---</p>
+
+      <form id="editMemberForm">
+        <input type="hidden" id="editMemberId">
+        <input type="hidden" id="editUserId">
+
+        <div style="margin-bottom:14px;">
+          <label style="display:block;color:#aaa;font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:600;">Full Name</label>
+          <input type="text" id="editFullName" required style="width:100%;padding:10px 12px;background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:0.9rem;outline:none;transition:border-color 0.2s;">
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <label style="display:block;color:#aaa;font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:600;">Phone Number</label>
+          <input type="text" id="editPhone" required style="width:100%;padding:10px 12px;background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:0.9rem;outline:none;">
+        </div>
+
+        <div style="margin-bottom:14px;">
+          <label style="display:block;color:#aaa;font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:600;">Assigned Trainer</label>
+          <select id="editTrainerSelect" style="width:100%;padding:10px 12px;background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:0.9rem;outline:none;">
+            <option value="">No Trainer (Self Workout)</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom:18px;">
+          <label style="display:block;color:#aaa;font-size:0.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:600;">Membership Status</label>
+          <select id="editStatusSelect" style="width:100%;padding:10px 12px;background:#111;border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:0.9rem;outline:none;">
+            <option value="active">ACTIVE</option>
+            <option value="expired">EXPIRED</option>
+            <option value="pending">PENDING</option>
+          </select>
+        </div>
+
+        <div style="display:flex;gap:12px;">
+          <button type="button" id="editCancelBtn" style="flex:1;padding:12px;background:#2a2a2a;color:#fff;font-size:0.9rem;font-weight:700;border:1px solid rgba(255,255,255,0.1);border-radius:10px;cursor:pointer;">
+            Cancel
+          </button>
+          <button type="submit" id="editSaveBtn" style="flex:1;padding:12px;background:linear-gradient(135deg,#e63946,#c0222f);color:#fff;font-size:0.9rem;font-weight:700;border:none;border-radius:10px;cursor:pointer;">
+            <i class="fa-solid fa-check" style="margin-right:4px;"></i> Save & Update
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Backend Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/admin.js"></script>
+  <script>
+    // Extra: Plan filter
+    const planFilter = document.getElementById('planFilter');
+    planFilter?.addEventListener('change', () => {
+      const val = planFilter.value.toLowerCase();
+      document.querySelectorAll('#mainTable tbody tr').forEach(row => {
+        if (!val) { row.style.display = ''; return; }
+        const tag = row.querySelector('.plan-tag');
+        row.style.display = tag?.textContent.toLowerCase().includes(val) ? '' : 'none';
+      });
+    });
+
+    // ============================================================
+    // RENEW MEMBERSHIP – Razorpay Flow
+    // ============================================================
+    const renewModal = document.getElementById('renewModal');
+    const renewPlanSelect = document.getElementById('renewPlanSelect');
+    const renewAmount = document.getElementById('renewAmount');
+    const renewPayBtn = document.getElementById('renewPayBtn');
+    const renewMemberLabel = document.getElementById('renewMemberLabel');
+    const closeRenewModal = document.getElementById('closeRenewModal');
+
+    let currentRenewMember = null; // { id, custom_id, name, phone }
+    let plansCache = [];
+
+    // Load plans into the modal dropdown (Hardcoded to match UI for prototype phase)
+    // Load plans dynamically from the database
+    async function loadPlansForRenewal() {
+        try {
+            const { data: dbPlans, error } = await window.db.from('plans').select('id, name, price, duration_days').order('price', { ascending: true });
+            
+            if (error) throw error;
+            
+            renewPlanSelect.innerHTML = '<option value="" disabled selected>Choose a plan...</option>';
+            if (dbPlans && dbPlans.length > 0) {
+                dbPlans.forEach(p => {
+                    renewPlanSelect.innerHTML += `<option value="${p.id}" data-price="${p.price}" data-duration="${p.duration_days}">${p.name} — ₹${Number(p.price).toLocaleString('en-IN')} (${p.duration_days} days)</option>`;
+                });
+            } else {
+                // Fallback
+                const defaultPlans = [
+                    { id: 'starter', name: '1 Month Starter', price: 2000, duration_days: 30 },
+                    { id: 'six_month_gym', name: '6 Month Gym', price: 6499, duration_days: 180 },
+                    { id: 'transformation', name: '3 Month Transformation', price: 5999, duration_days: 90 },
+                    { id: 'six_month_cardio', name: '6 Month Cardio', price: 10499, duration_days: 180 },
+                    { id: 'elite', name: '6 Month Elite', price: 10999, duration_days: 180 }
+                ];
+                defaultPlans.forEach(p => {
+                    renewPlanSelect.innerHTML += `<option value="${p.id}" data-price="${p.price}" data-duration="${p.duration_days}">${p.name} — ₹${Number(p.price).toLocaleString('en-IN')} (${p.duration_days} days)</option>`;
+                });
+            }
+        } catch (err) {
+            console.error("Error loading plans for renewal:", err);
+            // Fallback
+            renewPlanSelect.innerHTML = '<option value="" disabled selected>Choose a plan...</option>';
+            const defaultPlans = [
+                { id: 'starter', name: '1 Month Starter', price: 2000, duration_days: 30 },
+                { id: 'six_month_gym', name: '6 Month Gym', price: 6499, duration_days: 180 },
+                { id: 'transformation', name: '3 Month Transformation', price: 5999, duration_days: 90 },
+                { id: 'six_month_cardio', name: '6 Month Cardio', price: 10499, duration_days: 180 },
+                { id: 'elite', name: '6 Month Elite', price: 10999, duration_days: 180 }
+            ];
+            defaultPlans.forEach(p => {
+                renewPlanSelect.innerHTML += `<option value="${p.id}" data-price="${p.price}" data-duration="${p.duration_days}">${p.name} — ₹${Number(p.price).toLocaleString('en-IN')} (${p.duration_days} days)</option>`;
+            });
+        }
+    }
+
+    // Update displayed amount when plan changes
+    renewPlanSelect?.addEventListener('change', () => {
+        const sel = renewPlanSelect.options[renewPlanSelect.selectedIndex];
+        renewAmount.textContent = '₹' + Number(sel.dataset.price).toLocaleString('en-IN');
+    });
+
+    // Open modal (called from dynamically generated rows in admin.js)
+    window.openRenewModal = function(memberId, memberCustomId, memberName, memberPhone) {
+        currentRenewMember = { id: memberId, custom_id: memberCustomId, name: memberName, phone: memberPhone };
+        renewMemberLabel.textContent = `Member: ${memberName} (${memberCustomId})`;
+        renewPlanSelect.selectedIndex = 0;
+        renewAmount.textContent = '₹0';
+        renewModal.style.display = 'flex';
+        loadPlansForRenewal();
+    };
+
+    // Close modal
+    closeRenewModal?.addEventListener('click', () => { renewModal.style.display = 'none'; });
+    renewModal?.addEventListener('click', (e) => { if (e.target === renewModal) renewModal.style.display = 'none'; });
+
+    // Execute the renewal logic in the database
+    async function executeRenewalDBUpdate(amount, planDuration, isOffline, txRef = null) {
+        // 1. Calculate new expiry date
+        const { data: memberData } = await window.db.from('members').select('membership_end').eq('id', currentRenewMember.id).single();
+        
+        let newEnd = new Date();
+        if (memberData && memberData.membership_end) {
+            const currentEnd = new Date(memberData.membership_end);
+            if (currentEnd > new Date()) {
+                newEnd = currentEnd; // Add to existing if still active
+            }
+        }
+        newEnd.setDate(newEnd.getDate() + planDuration);
+        
+        // 2. Update member status, plan_id, and end date
+        const { error: updateError } = await window.db.from('members').update({
+            status: 'active',
+            plan_id: renewPlanSelect.value,
+            membership_end: newEnd.toISOString().split('T')[0],
+            updated_at: new Date().toISOString()
+        }).eq('id', currentRenewMember.id);
+        
+        if (updateError) throw updateError;
+        
+        // 3. Insert payment record
+        const { error: payError } = await window.db.from('payments').insert([{
+            member_id: currentRenewMember.id,
+            amount: amount,
+            payment_method: isOffline ? 'cash' : 'online',
+            status: 'paid',
+            transaction_reference: txRef || `CASH-${Date.now()}`,
+            paid_at: new Date().toISOString()
+        }]);
+        
+        if (payError) console.warn("Payment log warning:", payError);
+    }
+
+    // OFFLINE Renew
+    const renewOfflineBtn = document.getElementById('renewOfflineBtn');
+    renewOfflineBtn?.addEventListener('click', async () => {
+        if (!currentRenewMember) return alert('No member selected.');
+        if (!renewPlanSelect.value) return alert('Please select a plan.');
+
+        const sel = renewPlanSelect.options[renewPlanSelect.selectedIndex];
+        const amount = Number(sel.dataset.price);
+        const planDuration = Number(sel.dataset.duration);
+
+        if (amount <= 0) return alert('Invalid amount.');
+
+        if (!confirm(`Are you sure you want to renew ${currentRenewMember.name} for ${planDuration} days offline (Cash)?`)) return;
+
+        renewOfflineBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+        renewOfflineBtn.disabled = true;
+
+        try {
+            await executeRenewalDBUpdate(amount, planDuration, true);
+            alert('✅ Offline Membership renewed successfully for ' + currentRenewMember.custom_id + '!');
+            renewModal.style.display = 'none';
+            location.reload(); 
+        } catch (err) {
+            console.error('Offline Renewal error:', err);
+            alert('Renewal update failed: ' + (err.message || JSON.stringify(err)));
+            renewOfflineBtn.disabled = false;
+        }
+        renewOfflineBtn.innerHTML = '<i class="fa-solid fa-money-bill" style="margin-right:6px;"></i> Offline (Cash)';
+    });
+
+    // ONLINE Pay & Renew
+    renewPayBtn?.addEventListener('click', () => {
+        if (!currentRenewMember) return alert('No member selected.');
+        if (!renewPlanSelect.value) return alert('Please select a plan.');
+
+        const sel = renewPlanSelect.options[renewPlanSelect.selectedIndex];
+        const amount = Number(sel.dataset.price);
+        const planDuration = Number(sel.dataset.duration);
+
+        if (amount <= 0) return alert('Invalid amount.');
+
+        const options = {
+            "key": "rzp_test_SeEg9HEO5nnatC",
+            "amount": amount * 100,
+            "currency": "INR",
+            "name": "FIT 'N' BLAZE",
+            "description": "Membership Renewal for " + currentRenewMember.custom_id,
+            "image": "../assets/FNB%20logo.png",
+            "handler": async function(response) {
+                // Razorpay success — update DB
+                renewPayBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+                renewPayBtn.disabled = true;
+
+                try {
+                    await executeRenewalDBUpdate(amount, planDuration, false, response.razorpay_payment_id);
+                    alert('✅ Membership renewed successfully for ' + currentRenewMember.custom_id + '!');
+                    renewModal.style.display = 'none';
+                    location.reload(); // Refresh to show updated data
+                } catch (err) {
+                    console.error('Renewal error:', err);
+                    alert('Payment was successful, but renewal update failed: ' + (err.message || JSON.stringify(err)));
+                }
+
+                renewPayBtn.innerHTML = '<i class="fa-solid fa-indian-rupee-sign" style="margin-right:6px;"></i> Online';
+                renewPayBtn.disabled = false;
+            },
+            "prefill": {
+                "name": currentRenewMember.name || "",
+                "contact": currentRenewMember.phone || ""
+            },
+            "theme": { "color": "#e63946" }
+        };
+
+        try {
+            const rzp = new Razorpay(options);
+            rzp.on('payment.failed', function(response) {
+                alert('Payment failed: ' + response.error.description);
+                renewPayBtn.innerHTML = '<i class="fa-solid fa-indian-rupee-sign" style="margin-right:6px;"></i> Pay & Renew';
+                renewPayBtn.disabled = false;
+            });
+            rzp.open();
+        } catch(err) {
+            console.error("Razorpay Error:", err);
+            alert("Could not load payment gateway. Please ensure ad-blockers are disabled or refresh the page.");
+            renewPayBtn.innerHTML = '<i class="fa-solid fa-indian-rupee-sign" style="margin-right:6px;"></i> Pay & Renew';
+            renewPayBtn.disabled = false;
+        }
+    });
+
+    // ============================================================
+    // EDIT & UPDATE MEMBER FLOW
+    // ============================================================
+    const editMemberModal = document.getElementById('editMemberModal');
+    const editMemberForm = document.getElementById('editMemberForm');
+    const closeEditMemberModal = document.getElementById('closeEditMemberModal');
+    const editCancelBtn = document.getElementById('editCancelBtn');
+    
+    const editMemberIdInput = document.getElementById('editMemberId');
+    const editUserIdInput = document.getElementById('editUserId');
+    const editFullNameInput = document.getElementById('editFullName');
+    const editPhoneInput = document.getElementById('editPhone');
+    const editTrainerSelect = document.getElementById('editTrainerSelect');
+    const editStatusSelect = document.getElementById('editStatusSelect');
+
+    // Load active trainers dynamically from database
+    async function loadTrainersForEditSelect() {
+        try {
+            const { data: trainerList, error } = await window.db.from('trainers').select(`
+                id,
+                users (full_name)
+            `);
+            if (!error && trainerList) {
+                editTrainerSelect.innerHTML = '<option value="">No Trainer (Self Workout)</option>';
+                trainerList.forEach(t => {
+                    const name = t.users?.full_name || 'Unnamed Trainer';
+                    editTrainerSelect.innerHTML += `<option value="${t.id}">${name}</option>`;
+                });
+            }
+        } catch (e) {
+            console.error("Error loading trainers:", e);
+        }
+    }
+
+    // Init selects
+    loadTrainersForEditSelect();
+
+    // Open Edit Member Modal
+    window.openEditMemberModal = function(memberId, userId, name, phone, trainerId, status) {
+        editMemberIdInput.value = memberId;
+        editUserIdInput.value = userId;
+        editFullNameInput.value = name;
+        editPhoneInput.value = phone;
+        editTrainerSelect.value = trainerId || '';
+        editStatusSelect.value = status || 'active';
+        
+        document.getElementById('editMemberLabel').textContent = `Member Name: ${name}`;
+        editMemberModal.style.display = 'flex';
+    };
+
+    // Close Modal event listeners
+    const hideEditModal = () => { editMemberModal.style.display = 'none'; };
+    closeEditMemberModal?.addEventListener('click', hideEditModal);
+    editCancelBtn?.addEventListener('click', hideEditModal);
+    editMemberModal?.addEventListener('click', (e) => { if (e.target === editMemberModal) hideEditModal(); });
+
+    // Handle Form Submission
+    editMemberForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const memberId = editMemberIdInput.value;
+        const userId = editUserIdInput.value;
+        const fullName = editFullNameInput.value.trim();
+        const phone = editPhoneInput.value.trim();
+        const trainerId = editTrainerSelect.value || null;
+        const status = editStatusSelect.value;
+        
+        const saveBtn = document.getElementById('editSaveBtn');
+        const oldBtnText = saveBtn.innerHTML;
+        saveBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving...';
+        saveBtn.disabled = true;
+
+        try {
+            // 1. Update user details in 'users' table
+            const { error: userError } = await window.db.from('users').update({
+                full_name: fullName,
+                phone: phone
+            }).eq('id', userId);
+            
+            if (userError) throw userError;
+
+            // 2. Prepare Member updates
+            const memberUpdates = {
+                assigned_trainer_id: trainerId,
+                status: status,
+                updated_at: new Date().toISOString()
+            };
+
+            // 3. Update member details in 'members' table
+            const { error: memberError } = await window.db.from('members').update(memberUpdates).eq('id', memberId);
+            if (memberError) throw memberError;
+
+            alert('✅ Member details updated successfully!');
+            hideEditModal();
+            location.reload();
+        } catch (err) {
+            console.error('Update error:', err);
+            alert('Failed to update member: ' + (err.message || JSON.stringify(err)));
+        } finally {
+            saveBtn.innerHTML = oldBtnText;
+            saveBtn.disabled = false;
+        }
+    });
+  </script>
+</body>
+</html>

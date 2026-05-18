@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Member Dashboard | Fit 'N' Blaze</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/member.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="#" class="sidebar-logo">
+                <img src="../assets/FNB logo.png" alt="FIT 'N' BLAZE Logo" class="sidebar-logo-img"> FIT<span>'N'</span>BLAZE
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item active">
+                <i class="fa-solid fa-border-all"></i> Dashboard
+            </a>
+            <a href="membership.html" class="nav-item">
+                <i class="fa-solid fa-id-card"></i> Membership
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i> Profile
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="../index.html" class="nav-item">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="welcome-msg">Loading...</h1>
+                <div class="header-badges">
+                    <span class="badge badge-goal"><i class="fa-solid fa-bullseye"></i> --</span>
+                    <span class="badge badge-status"><i class="fa-solid fa-circle-check"></i> --</span>
+                </div>
+            </div>
+            <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
+                <!-- Notifications Dropdown -->
+                <div class="notifications-wrapper" style="position: relative;">
+                    <button class="notification-btn" id="notifToggle">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notif-badge">3</span>
+                    </button>
+                    <div class="notifications-dropdown" id="notifDropdown">
+                        <div class="notif-header">
+                            <h3>Notifications</h3>
+                            <span class="mark-read">Mark all as read</span>
+                        </div>
+                        <div class="notif-body" id="notifList">
+                            <!-- Dynamic notifications loaded via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <a href="profile.html" style="text-decoration: none;">
+                    <div class="profile-avatar">--</div>
+                </a>
+            </div>
+        </header>
+
+        <!-- Dashboard Container -->
+        <div class="dashboard-container" id="dashboard">
+            
+            <!-- PT Scheduler Card -->
+            <div class="card pt-scheduler-card animate-in" style="background: linear-gradient(135deg, rgba(229, 9, 20, 0.08) 0%, rgba(20, 20, 20, 0.95) 100%); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; margin-bottom: 20px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                    <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(229, 9, 20, 0.15); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--accent-primary); flex-shrink: 0;">
+                        <i class="fa-solid fa-user-clock"></i>
+                    </div>
+                    <div>
+                        <h3 style="margin: 0 0 4px 0; font-size: 16px; color: var(--text-main);">Daily PT Session Slot</h3>
+                        <p id="ptStatusText" style="margin: 0; font-size: 13px; color: var(--text-muted);">Coordinate your personal training session for today with your trainer.</p>
+                    </div>
+                </div>
+                <button class="btn-primary" id="setPtBtn" style="padding: 10px 20px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-clock"></i> Set Today's PT Time
+                </button>
+            </div>
+
+            <!-- Hero Summary Card -->
+            <div class="card hero-summary animate-in">
+                <div class="summary-item">
+                    <span class="summary-label">Member ID</span>
+                    <span class="summary-value">Loading...</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Assigned Trainer</span>
+                    <span class="summary-value"><i class="fa-solid fa-user-ninja" style="color: var(--accent-primary); font-size: 16px; margin-right: 5px;"></i>Loading...</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Current Plan</span>
+                    <span class="summary-value">Loading...</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Expiry Date</span>
+                    <span class="summary-value">Loading...</span>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid animate-in delay-1">
+                <div class="card stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-weight-scale"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value">--</span>
+                        <span class="stat-label">Current Weight</span>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon" style="color: var(--warning); background-color: rgba(241, 196, 15, 0.1);"><i class="fa-solid fa-flag-checkered"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value">--</span>
+                        <span class="stat-label">Target Weight</span>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon" style="color: var(--success); background-color: rgba(46, 204, 113, 0.1);"><i class="fa-solid fa-arrow-trend-down"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value">--</span>
+                        <span class="stat-label">Weight Lost</span>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon" style="color: #3498db; background-color: rgba(52, 152, 219, 0.1);"><i class="fa-solid fa-ruler-vertical"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value">--</span>
+                        <span class="stat-label">Height</span>
+                    </div>
+                </div>
+                <div class="card stat-card">
+                    <div class="stat-icon" style="color: #9b59b6; background-color: rgba(155, 89, 182, 0.1);"><i class="fa-solid fa-calculator"></i></div>
+                    <div class="stat-info">
+                        <span class="stat-value" id="currentBmiValue">--</span>
+                        <span class="stat-label">Current BMI</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goal Performance & Transformation Card -->
+            <div class="card progress-section animate-in delay-2" id="progress" style="position: relative;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h2 class="card-title" style="margin: 0;"><i class="fa-solid fa-route"></i> Goal Performance Hub</h2>
+                    <button id="toggleGoalEditor" title="Adjust Metrics" style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-color); color: var(--text-muted); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease;" onmouseover="this.style.background='rgba(229, 9, 20, 0.1)'; this.style.borderColor='var(--accent-primary)'; this.style.color='var(--accent-primary)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.04)'; this.style.borderColor='var(--border-color)'; this.style.color='var(--text-muted)'">
+                        <i class="fa-solid fa-sliders" style="font-size: 13px;"></i>
+                    </button>
+                </div>
+
+                <!-- Goal Progress Layout -->
+                <div id="goalProgressDisplay">
+                    <div class="progress-header" style="margin-bottom: 10px;">
+                        <span id="progressLabel" style="font-weight: 500; color: var(--text-muted);">Progress towards goal</span>
+                        <span id="progressPercent" style="color: var(--accent-primary); font-weight: 600; font-size: 15px;">--% Completed</span>
+                    </div>
+                    <div class="progress-track" style="height: 12px; background: rgba(255, 255, 255, 0.05); border-radius: 6px; overflow: hidden; margin-bottom: 15px;">
+                        <div class="progress-fill" id="weightProgressBar" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-primary), #ff4d4d); transition: width 0.8s ease-in-out; border-radius: 6px;"></div>
+                    </div>
+                    <div class="progress-stats" style="display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <span id="progressStart">Start: -- kg</span>
+                        <span id="progressCurrent" style="color: var(--text-main); font-weight: 600;">Current: -- kg</span>
+                        <span id="progressTarget">Target: -- kg</span>
+                    </div>
+                </div>
+
+                <!-- Inline Interactive Metric Adjuster -->
+                <div id="goalMetricEditor" style="display: none; background: rgba(0, 0, 0, 0.2); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 10px; transition: all 0.3s ease;">
+                    <h3 style="font-size: 14px; margin: 0 0 12px 0; color: var(--text-main); font-weight: 600;">Update Fitness Metrics</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px;">
+                        <div>
+                            <label style="display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">Start Weight (kg)</label>
+                            <input type="number" id="editStartWeight" step="0.1" style="width: 100%; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; color: var(--text-main); font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">Current Weight (kg)</label>
+                            <input type="number" id="editCurrentWeight" step="0.1" style="width: 100%; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; color: var(--text-main); font-size: 13px;">
+                        </div>
+                        <div>
+                            <label style="display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px;">Target Weight (kg)</label>
+                            <input type="number" id="editTargetWeight" step="0.1" style="width: 100%; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; color: var(--text-main); font-size: 13px;">
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 8px; justify-content: flex-end;">
+                        <button id="cancelGoalEdit" style="background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer;">Cancel</button>
+                        <button id="saveGoalMetrics" style="background: var(--accent-primary); border: none; color: white; padding: 6px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; font-weight: 500;">Save Updates</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout for Programs -->
+            <div class="two-col">
+                <!-- Workout Plan -->
+                <div class="card animate-in delay-3" id="workout">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-solid fa-dumbbell"></i> Weekly Workout Plan</h2>
+                        <button class="btn-icon" title="Customize Workout Plan"><i class="fa-solid fa-pen"></i></button>
+                    </div>
+                    <ul class="plan-list">
+                        <li class="plan-item">
+                            <span class="plan-day">Monday</span>
+                            <span class="plan-desc">Chest & Triceps</span>
+                        </li>
+                        <li class="plan-item">
+                            <span class="plan-day">Tuesday</span>
+                            <span class="plan-desc">Back & Biceps</span>
+                        </li>
+                        <li class="plan-item">
+                            <span class="plan-day">Wednesday</span>
+                            <span class="plan-desc">Cardio & Core</span>
+                        </li>
+                        <li class="plan-item">
+                            <span class="plan-day">Thursday</span>
+                            <span class="plan-desc">Legs</span>
+                        </li>
+                        <li class="plan-item">
+                            <span class="plan-day">Friday</span>
+                            <span class="plan-desc">Shoulders</span>
+                        </li>
+                        <li class="plan-item">
+                            <span class="plan-day">Saturday</span>
+                            <span class="plan-desc">Functional Training</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Diet Plan -->
+                <div class="card animate-in delay-4" id="diet">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-solid fa-utensils"></i> Daily Nutrition Plan</h2>
+                        <button class="btn-icon" title="Customize Diet Plan"><i class="fa-solid fa-pen"></i></button>
+                    </div>
+                    <ul class="plan-list">
+                        <li class="plan-item">
+                            <span class="diet-time">Breakfast</span>
+                            <span class="plan-desc">Oats + Eggs</span>
+                        </li>
+                        <li class="plan-item">
+                            <span class="diet-time">Lunch</span>
+                            <span class="plan-desc">Grilled Chicken / Paneer + Rice</span>
+                        </li>
+                        <li class="plan-item">
+                            <span class="diet-time">Evening</span>
+                            <span class="plan-desc">Protein Shake</span>
+                        </li>
+                        <li class="plan-item">
+                            <span class="diet-time">Dinner</span>
+                            <span class="plan-desc">Salad + Lean Protein</span>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+
+            <!-- Tools and Details (Two Column) -->
+            <div class="two-col" style="margin-bottom: 20px;">
+                <!-- BMI Calculator -->
+                <div class="card animate-in delay-4">
+                    <h2 class="card-title"><i class="fa-solid fa-calculator"></i> BMI Calculator</h2>
+                    <div class="bmi-calculator">
+                        <div class="form-group">
+                            <label>Height (cm)</label>
+                            <input type="number" id="bmiHeight" placeholder="e.g. 175">
+                        </div>
+                        <div class="form-group">
+                            <label>Weight (kg)</label>
+                            <input type="number" id="bmiWeight" placeholder="e.g. 70">
+                        </div>
+                        <button class="btn-primary" id="calculateBmiBtn">Calculate</button>
+                        <div class="bmi-result" id="bmiResult">
+                            <span>Your BMI: <strong id="bmiValue">--</strong></span>
+                            <span class="bmi-category" id="bmiCategory">Enter your details</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Column Wrapper -->
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <!-- Refer a Friend -->
+                    <div class="card animate-in delay-5" style="display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center; padding: 24px 20px; background: linear-gradient(135deg, rgba(229, 9, 20, 0.05), transparent); border: 1px dashed var(--border-color); flex: 1;">
+                        <div style="width: 48px; height: 48px; border-radius: 50%; background: rgba(229, 9, 20, 0.1); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--accent-primary); margin-bottom: 12px;">
+                            <i class="fa-solid fa-gift"></i>
+                        </div>
+                        <h3 style="margin: 0 0 8px 0; font-size: 16px; color: var(--text-main);">Refer a Friend</h3>
+                        <p style="margin: 0 0 16px 0; font-size: 13px; color: var(--text-muted); line-height: 1.4;">Workout buddies make the best motivation. Invite a friend to join the gym today!</p>
+                        
+                        <button class="btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px;">
+                            <i class="fa-solid fa-share-nodes"></i> Share Invite Link
+                        </button>
+                    </div>
+
+                    <!-- Rate Us -->
+                    <div class="card animate-in delay-6" style="padding: 24px 20px; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                        <h3 style="margin: 0 0 8px 0; font-size: 16px; color: var(--text-main); display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-star" style="color: var(--warning);"></i> Rate Your Experience</h3>
+                        <p style="margin: 0 0 16px 0; font-size: 13px; color: var(--text-muted);">How are you enjoying Fit 'N' Blaze?</p>
+                        <div style="display: flex; gap: 8px; font-size: 24px; color: #3f3f46; cursor: pointer; margin-bottom: 16px;">
+                            <i class="fa-solid fa-star hover-star" onmouseover="this.style.color='var(--warning)'" onmouseout="this.style.color='#3f3f46'"></i>
+                            <i class="fa-solid fa-star hover-star" onmouseover="this.style.color='var(--warning)'" onmouseout="this.style.color='#3f3f46'"></i>
+                            <i class="fa-solid fa-star hover-star" onmouseover="this.style.color='var(--warning)'" onmouseout="this.style.color='#3f3f46'"></i>
+                            <i class="fa-solid fa-star hover-star" onmouseover="this.style.color='var(--warning)'" onmouseout="this.style.color='#3f3f46'"></i>
+                            <i class="fa-solid fa-star hover-star" onmouseover="this.style.color='var(--warning)'" onmouseout="this.style.color='#3f3f46'"></i>
+                        </div>
+                        <button class="btn-primary" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Fit+N+Blaze', '_blank')" style="width: 100%; padding: 10px; font-size: 13px; background: transparent; color: var(--text-main); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+                            <i class="fa-brands fa-google"></i> Review on Maps
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Custom JS -->
+    <!-- Backend Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/member.js"></script>
+</body>
+</html>

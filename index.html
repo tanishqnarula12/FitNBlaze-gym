@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="FIT 'N' BLAZE - Transform Your Body. Ignite Your Fire. Premium Gym in Janta Colony, Jaipur by Gaurav Vardani.">
+    <title>FIT 'N' BLAZE</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- CSS Loading animation -->
+    <div class="loader-wrapper">
+        <div class="loader">
+            <img src="./assets/FNB%20logo.png" alt="Fit N Blaze Logo"
+                style="width: 80px; height: auto; margin-bottom: 20px;" class="fire-icon">
+            <h2 class="loader-text">FIT 'N' BLAZE</h2>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/916375309545?text=Hi%20FIT%20N%20BLAZE,%20I%20want%20to%20join%20the%20gym.%20Please%20share%20details."
+        class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="#">FIT <span class="text-primary">'N'</span> BLAZE</a>
+            </div>
+
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                    <li><a href="#cafe" class="nav-link">Café</a></li>
+                    <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                </ul>
+                <div class="nav-cta">
+                    <a href="auth/login.html" class="btn btn-outline" style="margin-right: 10px; padding: 10px 20px;">Login</a>
+                    <a href="#contact" class="btn btn-primary">Join Now</a>
+                </div>
+            </div>
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title reveal">Transform Your Body.<br><span class="text-primary">Ignite Your Fire.</span>
+            </h1>
+            <p class="hero-subtitle reveal delay-1">MMA | Gym | Yoga | Cardio | Dance</p>
+            <div class="hero-buttons reveal delay-2">
+                <a href="auth/join.html" class="btn btn-primary btn-lg">Join Now</a>
+                <a href="#contact" class="btn btn-outline btn-lg">Book Free Trial</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <a href="#about">
+                <i class="fa-solid fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section-padding section-bg-alt">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-container reveal-left">
+                    <!-- Placeholder using Unsplash for premium feel -->
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Gaurav Vardani - Founder" class="about-img">
+                    <div class="experience-badge">
+                        <span class="years">10+</span>
+                        <span class="text">Years<br>Experience</span>
+                    </div>
+                </div>
+                <div class="about-content reveal-right">
+                    <div class="section-header">
+                        <h4 class="section-subtitle text-secondary">Who We Are</h4>
+                        <h2 class="section-title">Meet Your Coach</h2>
+                    </div>
+                    <p class="about-text">
+                        Welcome to FIT 'N' BLAZE, Jaipur's most elite fitness destination. Founded with a vision to
+                        redefine fitness, we provide a motivating environment equipped with state-of-the-art facilities
+                        and expert guidance.
+                    </p>
+                    <p class="about-text highlight">
+                        <i class="fa-solid fa-quote-left"></i>
+                        Helping Jaipur stay fit with expert training and modern facilities.
+                        <i class="fa-solid fa-quote-right"></i>
+                    </p>
+                    <div class="founder-info">
+                        <h3 class="founder-name">Gaurav Vardani</h3>
+                        <p class="founder-title text-primary">Founder & Head Coach</p>
+                    </div>
+                    <ul class="about-features">
+                        <li><i class="fa-solid fa-check text-secondary"></i> Premium Equipment</li>
+                        <li><i class="fa-solid fa-check text-secondary"></i> Certified Trainers</li>
+                        <li><i class="fa-solid fa-check text-secondary"></i> Nutrition Plans</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services section-padding">
+        <div class="container">
+            <div class="section-header center">
+                <h4 class="section-subtitle text-secondary">What We Offer</h4>
+                <h2 class="section-title">Our Premium Services</h2>
+            </div>
+
+            <div class="services-grid">
+                <!-- Card 1 -->
+                <div class="service-card reveal-up">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-hand-fist"></i>
+                    </div>
+                    <h3>MMA / Boxing</h3>
+                    <p>Learn combat techniques, build stamina, and gain unshakeable confidence with our elite MMA
+                        programs.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="service-card reveal-up delay-1">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-dumbbell"></i>
+                    </div>
+                    <h3>Gym / Cardio</h3>
+                    <p>State-of-the-art equipment designed to push your limits, build muscle, and shred body fat
+                        effectively.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="service-card reveal-up delay-2">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-person-praying"></i>
+                    </div>
+                    <h3>Yoga</h3>
+                    <p>Rejuvenate your mind and body. Improve flexibility, core strength, and mental focus with guided
+                        sessions.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="service-card reveal-up">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-child-reaching"></i>
+                    </div>
+                    <h3>CrossFit</h3>
+                    <p>High-intensity functional training designed to make you stronger, faster, and more endurant in
+                        everyday life.</p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="service-card reveal-up delay-1">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3>Self Defence</h3>
+                    <p>Practical and effective self-defence training tailored for real-world scenarios. Empower
+                        yourself.</p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="service-card reveal-up delay-2">
+                    <div class="service-icon">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <h3>Dance / Zumba</h3>
+                    <p>Burn calories while having fun. High-energy rhythm and beats to keep your heart pumping and
+                        spirits high.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="diff-section">
+
+        <!-- Cinematic background layers -->
+        <div class="diff__bg-noise"></div>
+        <div class="diff__bg-gradient"></div>
+        <div class="diff__corner-glow diff__corner-glow--tl"></div>
+        <div class="diff__corner-glow diff__corner-glow--br"></div>
+
+        <div class="container diff__container">
+
+            <!-- Section Header -->
+            <div class="diff__header reveal-up">
+                <span class="diff__eyebrow">
+                    <span class="diff__eyebrow-line"></span>
+                    The FNB Advantage
+                    <span class="diff__eyebrow-line"></span>
+                </span>
+                <h2 class="diff__heading">What Makes <br><span class="diff__heading-accent">Fit 'N'
+                        Blaze</span><br>Different</h2>
+                <p class="diff__subheading">We don't just build bodies &mdash; we build legends. Here's what sets us
+                    apart
+                    from every other gym in Jaipur.</p>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="diff__stats reveal-up" id="statsRow">
+                <div class="diff__stat">
+                    <span class="diff__stat-number">
+                        <span class="diff__stat-count" data-target="7000" data-suffix="">0</span><span
+                            class="diff__stat-unit">sqft</span>
+                    </span>
+                    <span class="diff__stat-label">Single-Floor Space</span>
+                </div>
+                <div class="diff__stat-divider"></div>
+                <div class="diff__stat">
+                    <span class="diff__stat-number">
+                        <span class="diff__stat-count" data-target="7" data-suffix="+">0</span><span
+                            class="diff__stat-unit">yrs</span>
+                    </span>
+                    <span class="diff__stat-label">Trainer Experience</span>
+                </div>
+                <div class="diff__stat-divider"></div>
+                <div class="diff__stat">
+                    <span class="diff__stat-number">
+                        <span class="diff__stat-count" data-target="10" data-suffix="+">0</span><span
+                            class="diff__stat-unit">yrs</span>
+                    </span>
+                    <span class="diff__stat-label">Coaching Legacy</span>
+                </div>
+                <div class="diff__stat-divider"></div>
+                <div class="diff__stat">
+                    <span class="diff__stat-number">
+                        <span class="diff__stat-count" data-target="5" data-suffix="+">0</span><span
+                            class="diff__stat-unit"></span>
+                    </span>
+                    <span class="diff__stat-label">Specialty Zones</span>
+                </div>
+            </div>
+
+            <!-- Feature List with Spine -->
+            <div class="diff__features">
+                <div class="diff__spine"></div>
+
+                <!-- Feature 1 -->
+                <article class="diff__feature diff__feature--left reveal-left">
+                    <div class="diff__feature-content">
+                        <div class="diff__feature-icon-wrap">
+                            <i class="fa-solid fa-warehouse"></i>
+                        </div>
+                        <div class="diff__feature-text">
+                            <h3 class="diff__feature-title">Spacious &amp; Premium<br>Workout Environment</h3>
+                            <p class="diff__feature-desc">Train in one of the largest gyms in the area with over
+                                <strong>7000 sq. ft.</strong> of single-floor space, giving you freedom to train without
+                                crowding.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="diff__feature-num" aria-hidden="true">01</div>
+                </article>
+
+                <!-- Feature 2 -->
+                <article class="diff__feature diff__feature--right reveal-right">
+                    <div class="diff__feature-num" aria-hidden="true">02</div>
+                    <div class="diff__feature-content">
+                        <div class="diff__feature-icon-wrap">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <div class="diff__feature-text">
+                            <h3 class="diff__feature-title">Top-Class<br>Equipment</h3>
+                            <p class="diff__feature-desc">High-quality modern machines built for <strong>strength,
+                                    endurance, and safe workouts</strong> engineered to push your limits at every
+                                level.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Feature 3 -->
+                <article class="diff__feature diff__feature--left reveal-left">
+                    <div class="diff__feature-content">
+                        <div class="diff__feature-icon-wrap">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div class="diff__feature-text">
+                            <h3 class="diff__feature-title">Personalized<br>Workout Zones</h3>
+                            <p class="diff__feature-desc">Dedicated areas tailored for <strong>fat loss, muscle gain,
+                                    and goal-based training</strong> because generic workouts get generic results.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="diff__feature-num" aria-hidden="true">03</div>
+                </article>
+
+                <!-- Feature 4 -->
+                <article class="diff__feature diff__feature--right reveal-right">
+                    <div class="diff__feature-num" aria-hidden="true">04</div>
+                    <div class="diff__feature-content">
+                        <div class="diff__feature-icon-wrap">
+                            <i class="fa-solid fa-hand-fist"></i>
+                        </div>
+                        <div class="diff__feature-text">
+                            <h3 class="diff__feature-title">Dedicated MMA<br>Training Area</h3>
+                            <p class="diff__feature-desc">A specialized MMA zone for <strong>strength, agility, and
+                                    combat training</strong> where warriors are forged one round at a time.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Feature 5 -->
+                <article class="diff__feature diff__feature--left reveal-left">
+                    <div class="diff__feature-content">
+                        <div class="diff__feature-icon-wrap">
+                            <i class="fa-solid fa-fire-flame-curved"></i>
+                        </div>
+                        <div class="diff__feature-text">
+                            <h3 class="diff__feature-title">Positive &amp; Motivating<br>Atmosphere</h3>
+                            <p class="diff__feature-desc">A <strong>high-energy environment</strong> engineered to keep
+                                members consistent, motivated, and coming back every single day.</p>
+                        </div>
+                    </div>
+                    <div class="diff__feature-num" aria-hidden="true">05</div>
+                </article>
+
+                <!-- Feature 6 -->
+                <article class="diff__feature diff__feature--right reveal-right">
+                    <div class="diff__feature-num" aria-hidden="true">06</div>
+                    <div class="diff__feature-content">
+                        <div class="diff__feature-icon-wrap">
+                            <i class="fa-solid fa-tags"></i>
+                        </div>
+                        <div class="diff__feature-text">
+                            <h3 class="diff__feature-title">Affordable &amp; Flexible<br>Packages</h3>
+                            <p class="diff__feature-desc"><strong>Premium fitness at fair pricing</strong> because
+                                transforming your body shouldn't require transforming your entire budget.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Feature 7 -->
+                <article class="diff__feature diff__feature--left reveal-left">
+                    <div class="diff__feature-content">
+                        <div class="diff__feature-icon-wrap">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <div class="diff__feature-text">
+                            <h3 class="diff__feature-title">Experienced<br>Trainers</h3>
+                            <p class="diff__feature-desc">Certified coaches with <strong>7+ years of real-world
+                                    experience</strong> guiding every rep, every set, every transformation.</p>
+                        </div>
+                    </div>
+                    <div class="diff__feature-num" aria-hidden="true">07</div>
+                </article>
+
+                <!-- Feature 8 -->
+                <article class="diff__feature diff__feature--right reveal-right">
+                    <div class="diff__feature-num" aria-hidden="true">08</div>
+                    <div class="diff__feature-content">
+                        <div class="diff__feature-icon-wrap">
+                            <i class="fa-solid fa-yin-yang"></i>
+                        </div>
+                        <div class="diff__feature-text">
+                            <h3 class="diff__feature-title">Specialized Yoga &amp;<br>Boxing Coaching</h3>
+                            <p class="diff__feature-desc">Separate <strong>expert trainers for yoga and boxing</strong>
+                                because true fitness covers every dimension of mind, body, and power.</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Bottom CTA Strip -->
+            <div class="diff__cta-strip reveal-up">
+                <p class="diff__cta-text">Ready to experience the difference?</p>
+                <a href="#contact" class="diff__cta-btn">
+                    <span>Start Your Journey</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Fuel Your Fitness / Café Section -->
+    <section id="cafe" class="cafe-section">
+
+        <!-- Ambient background layers -->
+        <div class="cafe__bg-left"></div>
+        <div class="cafe__bg-right"></div>
+
+        <div class="cafe__inner">
+
+            <!-- LEFT: Stacked image collage -->
+            <div class="cafe__visual reveal-left">
+                <div class="cafe__img-main">
+                    <img src="./assets/fitnblaze%20cafe.PNG"
+                        alt="Fit N Blaze Café" class="cafe__photo cafe__photo--main"
+                        loading="lazy">
+                    <div class="cafe__img-overlay"></div>
+                </div>
+                <div class="cafe__img-cards">
+                    <div class="cafe__img-card">
+                        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=460&q=80"
+                            alt="Healthy meal bowl" class="cafe__photo" loading="lazy">
+                        <div class="cafe__img-overlay"></div>
+                    </div>
+                    <div class="cafe__img-card">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=460&q=80"
+                            alt="Energy booster smoothie" class="cafe__photo" loading="lazy">
+                        <div class="cafe__img-overlay"></div>
+                    </div>
+                </div>
+                <!-- Floating badge -->
+                <div class="cafe__badge">
+                    <i class="fa-solid fa-seedling"></i>
+                    <span>100% Fresh</span>
+                </div>
+            </div>
+
+            <!-- RIGHT: Content -->
+            <div class="cafe__content reveal-right">
+
+                <span class="cafe__eyebrow">
+                    <span class="cafe__eyebrow-dot"></span>
+                    In-House Health Café
+                </span>
+
+                <h2 class="cafe__heading">
+                    Fuel Your <span class="cafe__heading-accent">Fitness</span>
+                </h2>
+
+                <p class="cafe__lead">Your fitness journey doesn't stop after your workout.</p>
+
+                <p class="cafe__desc">
+                    At Fit 'N' Blaze, our in-house health café offers nutritious meals, protein shakes,
+                    and energy boosters &mdash; carefully crafted to support your <strong>recovery,
+                        performance, and overall fitness goals.</strong>
+                </p>
+
+                <!-- Highlight rows -->
+                <ul class="cafe__highlights">
+                    <li class="cafe__highlight">
+                        <div class="cafe__highlight-icon">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <div class="cafe__highlight-text">
+                            <h4>Fresh &amp; Healthy Meals</h4>
+                            <p>Balanced nutrition made fresh daily — no junk, no compromise.</p>
+                        </div>
+                    </li>
+                    <li class="cafe__highlight">
+                        <div class="cafe__highlight-icon">
+                            <i class="fa-solid fa-flask"></i>
+                        </div>
+                        <div class="cafe__highlight-text">
+                            <h4>Protein-Rich Shakes &amp; Drinks</h4>
+                            <p>High-protein blends designed to fuel muscle repair and recovery.</p>
+                        </div>
+                    </li>
+                    <li class="cafe__highlight">
+                        <div class="cafe__highlight-icon">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div class="cafe__highlight-text">
+                            <h4>Perfect Post-Workout Nutrition</h4>
+                            <p>Right nutrients at the right time — maximize every session.</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="cafe__actions">
+                    <a href="#contact" class="cafe__cta-btn">
+                        <span>Get Your Post-Workout Fuel</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <span class="cafe__note">
+                        <i class="fa-solid fa-circle-check"></i> Available daily for members
+                    </span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing section-padding section-bg-alt">
+        <div class="container">
+            <div class="section-header center">
+                <h4 class="section-subtitle text-secondary">Flexible Membership Plans</h4>
+                <h2 class="section-title">Choose Your Perfect Fitness Plan</h2>
+                <p class="section-desc text-secondary" style="max-width: 600px; margin: 0 auto; margin-top: 10px;">Affordable memberships designed to fit every fitness goal and budget.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Plan 1 -->
+                <div class="pricing-card reveal-up">
+                    <div class="pricing-header">
+                        <h3>1 Month</h3>
+                        <p>Gym & Cardio</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="currency">₹</span>
+                        <span class="amount">2,999</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Full Equipment Access</li>
+                        <li><i class="fa-solid fa-check"></i> General Trainer Support</li>
+                        <li><i class="fa-solid fa-check"></i> Floor Exercises</li>
+                        <li class="disabled"><i class="fa-solid fa-xmark"></i> Personalized Diet Plan</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline select-plan-btn" data-plan="1 Month Plan">Join Now</a>
+                </div>
+
+                <!-- Plan 2 -->
+                <div class="pricing-card reveal-up delay-1">
+                    <div class="pricing-header">
+                        <h3>3 Months</h3>
+                        <p>Gym & Cardio</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="currency">₹</span>
+                        <span class="amount">6,999</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Full Equipment Access</li>
+                        <li><i class="fa-solid fa-check"></i> General Trainer Support</li>
+                        <li><i class="fa-solid fa-check"></i> Floor Exercises</li>
+                        <li><i class="fa-solid fa-check"></i> Dietary Guidelines</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline select-plan-btn" data-plan="3 Month Plan">Join Now</a>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="pricing-card popular reveal-up delay-2">
+                    <div class="popular-badge">Best Value</div>
+                    <div class="pricing-header">
+                        <h3>1 Year</h3>
+                        <p>Gym & Cardio</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="currency">₹</span>
+                        <span class="amount">14,999</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fa-solid fa-check"></i> Full Equipment Access</li>
+                        <li><i class="fa-solid fa-check"></i> General Trainer Support</li>
+                        <li><i class="fa-solid fa-check"></i> Floor Exercises</li>
+                        <li><i class="fa-solid fa-check"></i> Personalized Diet Plan</li>
+                        <li><i class="fa-solid fa-check"></i> 1 Month Freeze Option</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary select-plan-btn" data-plan="12 Month Plan">Join Now</a>
+                </div>
+            </div>
+
+            <!-- Additional Plans Container -->
+            <div class="additional-pricing-container" id="additionalPricing">
+                <div id="additionalPricingInner">
+                    <div class="pricing-grid" style="margin-top: 30px;">
+                        <!-- Additional Plan 1 -->
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3>6 Months</h3>
+                                <p>Gym & Cardio</p>
+                            </div>
+                            <div class="pricing-price">
+                                <span class="currency">₹</span>
+                                <span class="amount">9,999</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fa-solid fa-check"></i> Full Equipment Access</li>
+                                <li><i class="fa-solid fa-check"></i> General Trainer Support</li>
+                                <li><i class="fa-solid fa-check"></i> Floor Exercises</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline select-plan-btn" data-plan="6 Month Plan">Join Now</a>
+                        </div>
+
+                        <!-- Additional Plan 2 -->
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3>Group Classes</h3>
+                                <p>1 Month</p>
+                            </div>
+                            <div class="pricing-price">
+                                <span class="currency">₹</span>
+                                <span class="amount">2,499</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fa-solid fa-check"></i> High-Energy Group Sessions</li>
+                                <li><i class="fa-solid fa-check"></i> Expert Instructor Led</li>
+                                <li><i class="fa-solid fa-check"></i> Dynamic Workouts</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline select-plan-btn" data-plan="Group Classes 1 Month">Join Now</a>
+                        </div>
+
+                        <!-- Additional Plan 3 -->
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3>Yoga Class</h3>
+                                <p>1 Month</p>
+                            </div>
+                            <div class="pricing-price">
+                                <span class="currency">₹</span>
+                                <span class="amount">2,499</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fa-solid fa-check"></i> Professional Yoga Guidance</li>
+                                <li><i class="fa-solid fa-check"></i> Flexibility & Core Strength</li>
+                                <li><i class="fa-solid fa-check"></i> Mental Focus</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline select-plan-btn" data-plan="Yoga Class 1 Month">Join Now</a>
+                        </div>
+                        
+                        <!-- Additional Plan 4 -->
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3>Yoga Class</h3>
+                                <p>3 Months</p>
+                            </div>
+                            <div class="pricing-price">
+                                <span class="currency">₹</span>
+                                <span class="amount">4,599</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fa-solid fa-check"></i> Professional Yoga Guidance</li>
+                                <li><i class="fa-solid fa-check"></i> Flexibility & Core Strength</li>
+                                <li><i class="fa-solid fa-check"></i> Mental Focus</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline select-plan-btn" data-plan="Yoga Class 3 Months">Join Now</a>
+                        </div>
+
+                        <!-- Additional Plan 5 -->
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3>Personal Training</h3>
+                                <p>Per Day Workout</p>
+                            </div>
+                            <div class="pricing-price">
+                                <span class="currency">₹</span>
+                                <span class="amount">250</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fa-solid fa-check"></i> 1-on-1 Focus Session</li>
+                                <li><i class="fa-solid fa-check"></i> Form Correction</li>
+                                <li><i class="fa-solid fa-check"></i> Day Specific Routine</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline select-plan-btn" data-plan="PT Per Day">Join Now</a>
+                        </div>
+
+                        <!-- Additional Plan 6 -->
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3>Group Session</h3>
+                                <p>Fitness Boxing / PT</p>
+                            </div>
+                            <div class="pricing-price">
+                                <span class="currency">₹</span>
+                                <span class="amount">4,999</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fa-solid fa-check"></i> Small Group Attention</li>
+                                <li><i class="fa-solid fa-check"></i> Shared Motivation</li>
+                                <li><i class="fa-solid fa-check"></i> Complete Workout Coverage</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline select-plan-btn" data-plan="Group Session">Join Now</a>
+                        </div>
+
+                        <!-- Additional Plan 7 -->
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h3>Personal One-on-One</h3>
+                                <p>Fitness Boxing / PT</p>
+                            </div>
+                            <div class="pricing-price">
+                                <span class="currency">₹</span>
+                                <span class="amount">9,999</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fa-solid fa-check"></i> Dedicated Personal Coach</li>
+                                <li><i class="fa-solid fa-check"></i> Custom Nutrition Strategy</li>
+                                <li><i class="fa-solid fa-check"></i> Progress Tracking</li>
+                            </ul>
+                            <a href="#contact" class="btn btn-outline select-plan-btn" data-plan="PT One-on-One">Join Now</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toggle Button -->
+            <div style="text-align: center; margin-top: 40px; position: relative; z-index: 10;">
+                <button class="btn toggle-pricing-btn" id="togglePricingBtn">
+                    <span id="togglePricingText">See More Pricing</span>
+                    <i class="fa-solid fa-chevron-down" id="togglePricingIcon"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery section-padding">
+        <div class="container">
+            <div class="section-header center">
+                <h4 class="section-subtitle text-secondary">Our Space</h4>
+                <h2 class="section-title">The Facility</h2>
+            </div>
+
+            <div class="carousel-wrapper">
+                <button class="carousel-btn left-btn" aria-label="Scroll left"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="carousel-container" id="galleryCarousel">
+                    <!-- Carousel items will be generated here by JS -->
+                </div>
+                <button class="carousel-btn right-btn" aria-label="Scroll right"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fullscreen Modal -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImg">
+        <div id="modalCaption"></div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews section-padding section-bg-alt">
+        <div class="container">
+            <div class="section-header center">
+                <h4 class="section-subtitle text-secondary">Testimonials</h4>
+                <h2 class="section-title">What Our Members Say</h2>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card reveal-up">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="review-text">"Super motivating environment and helpful trainers. The equipment is
+                        top-notch and the vibe makes you want to push harder every day."</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">RA</div>
+                        <div class="reviewer-info">
+                            <h4>Rahul Sharma</h4>
+                            <p>Member for 6 months</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card reveal-up delay-1">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="review-text">"Affordable and good facilities. Gaurav sir is extremely knowledgeable and
+                        guides you perfectly according to your body type."</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">AK</div>
+                        <div class="reviewer-info">
+                            <h4>Anjali Khatri</h4>
+                            <p>Member for 1 year</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card reveal-up delay-2">
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                            class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="review-text">"Best gym in Janta Colony area. The hygiene, the machines, and the crossfit
+                        section are amazing. Highly recommend it!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">VS</div>
+                        <div class="reviewer-info">
+                            <h4>Vikram Singh</h4>
+                            <p>Member for 3 months</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section-padding">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info reveal-left">
+                    <div class="section-header">
+                        <h4 class="section-subtitle text-secondary">Get In Touch</h4>
+                        <h2 class="section-title">Start Your Journey Today</h2>
+                    </div>
+                    <p class="contact-desc">Ready to ignite your fire? Drop us a message or visit our facility. Our
+                        trainers are ready to guide you.</p>
+
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Gulati Residency, 2A, near S J Public School, Janta Colony, Jaipur, Rajasthan</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="icon-box"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 6375309545</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="icon-box"><i class="fa-solid fa-clock"></i></div>
+                            <div>
+                                <h4>Timings</h4>
+                                <p>Mon - Sat: 6:00 AM - 12:00 PM<br>Sun: 6:00AM - 3:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-container reveal-right">
+                    <form id="leadForm" class="contact-form">
+                        <h3>Book a Walk-In / Trial</h3>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+91 XXXXX XXXXX"
+                                pattern="[0-9+\s-]{10,14}">
+                        </div>
+                        <div class="form-group">
+                            <label for="plan">Interested In</label>
+                            <select id="plan" name="plan">
+                                <option value="General Inquiry">General Inquiry</option>
+                                <option value="1 Month Plan">1 Month Gym/Cardio</option>
+                                <option value="3 Month Plan">3 Month Gym/Cardio</option>
+                                <option value="12 Month Plan">12 Month Gym/Cardio</option>
+                                <option value="MMA / Boxing">MMA / Boxing</option>
+                                <option value="Yoga">Yoga</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send via WhatsApp <i
+                                class="fab fa-whatsapp"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <a href="https://maps.app.goo.gl/QezaBEmHGJDt8Cze7" target="_blank"
+                style="display: block; text-decoration: none;">
+                <div class="map-container reveal-up">
+                    <iframe src="https://www.google.com/maps?q=FIT+n+BLAZE,+Janta+Colony,+Jaipur&output=embed"
+                        width="100%" height="400" style="border:0; pointer-events: none;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>FIT <span class="text-primary">'N'</span> BLAZE</h2>
+                    <p>Transform Your Body. Ignite Your Fire. The premier fitness destination in Janta Colony, Jaipur.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/fitnblazegym07" target="_blank" aria-label="Instagram"><i
+                                class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Cardio & Gym</a></li>
+                        <li><a href="#">MMA & Boxing</a></li>
+                        <li><a href="#">CrossFit</a></li>
+                        <li><a href="#">Yoga & Dance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fa-solid fa-location-dot"></i> Gulati Residency, 2A, near S J Public School, Jaipur</p>
+                    <p><i class="fa-solid fa-phone"></i> +91 6375309545</p>
+                    <p><i class="fa-solid fa-envelope"></i> fitnblaze@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> FIT 'N' BLAZE. All Rights Reserved.</p>
+                <p>Designed with <i class="fa-solid fa-heart text-primary"></i> for Fitness enthusiasts by ZENVISTA</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Promo Banner Popup -->
+    <div class="promo-popup-overlay" id="promoPopup">
+        <div class="promo-popup-content">
+            <button class="promo-popup-close" id="promoCloseBtn" aria-label="Close Promo">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <a href="#contact" class="promo-popup-link" id="promoLink">
+                <img src="./assets/img%20banner.jpeg" alt="Fit 'N' Blaze Special Offer">
+            </a>
+        </div>
+    </div>
+
+    <!-- Payment Modal Overlay -->
+    <div class="promo-popup-overlay" id="paymentModalOverlay">
+        <div class="promo-popup-content"
+            style="background: var(--bg-secondary); padding: 30px; border-radius: var(--border-radius-lg); text-align: left; width: 90vw; max-width: 450px;">
+            <button class="promo-popup-close" id="paymentCloseBtn" type="button" aria-label="Close Payment"
+                style="top: -15px; right: -15px;">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 style="font-size: 1.5rem; margin-bottom: 5px; text-transform: uppercase;">Checkout</h3>
+            <p id="paymentPlanName"
+                style="color: var(--accent-primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 5px;">Plan Name
+            </p>
+            <p id="paymentPlanAmount" style="font-size: 2rem; font-weight: 800; margin-bottom: 25px; line-height: 1;">₹0
+            </p>
+
+            <form id="paymentForm" class="contact-form">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="payName" style="font-size: 0.85rem;">Full Name</label>
+                    <input type="text" id="payName" required placeholder="John Doe" style="padding: 10px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label for="payEmail" style="font-size: 0.85rem;">Email Address</label>
+                    <input type="email" id="payEmail" required placeholder="john@example.com" style="padding: 10px;">
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="payPhone" style="font-size: 0.85rem;">Phone Number</label>
+                    <input type="tel" id="payPhone" required placeholder="+91 XXXXX XXXXX" pattern="[0-9+\s-]{10,14}"
+                        style="padding: 10px;">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="paySubmitBtn">Proceed to Pay</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

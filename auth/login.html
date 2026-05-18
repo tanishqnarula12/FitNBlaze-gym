@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Fit 'N' Blaze</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <!-- Left Side: Branding / Motivation -->
+        <div class="auth-left">
+            <div class="auth-left-content">
+                <a href="../index.html" class="logo">
+                    <img src="../assets/FNB logo.png" alt="Fit 'N' Blaze Logo">
+                    FIT<span>'N'</span>BLAZE
+                </a>
+                <div class="motivation-block">
+                    <h1>Track.<br>Transform.<br>Thrive.</h1>
+                    <p>Monitor your fitness progress, access personalized workout plans, and manage your membership seamlessly. Your journey to greatness starts here.</p>
+                </div>
+            </div>
+            
+            <!-- Abstract background decorative elements -->
+            <div class="bg-shape shape-1"></div>
+            <div class="bg-shape shape-2"></div>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="auth-right">
+            <div class="login-card">
+                <div class="login-header">
+                    <h2>Welcome Back</h2>
+                    <p>Please enter your details to sign in.</p>
+                </div>
+
+                <!-- Role Selector -->
+                <div class="role-selector">
+                    <button type="button" class="role-tab active" data-role="member">Member</button>
+                    <button type="button" class="role-tab" data-role="trainer">Trainer</button>
+                    <button type="button" class="role-tab" data-role="admin">Admin</button>
+                </div>
+
+                <!-- Form -->
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="userId" id="userIdLabel">Member ID</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-id-badge input-icon"></i>
+                            <input type="text" id="userId" placeholder="e.g. FNB023" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userPhone">Registered Phone Number</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-phone input-icon"></i>
+                            <input type="tel" id="userPhone" placeholder="e.g. 9876543212" pattern="[0-9]{10}" required>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span class="checkmark"></span>
+                            Remember Me
+                        </label>
+                    </div>
+
+                    <div id="errorMessage" class="error-message"></div>
+
+                    <button type="submit" class="btn-login" id="loginBtn">
+                        <span class="btn-text">Sign In</span>
+                        <div class="loader"></div>
+                    </button>
+                </form>
+
+                <div class="support-text">
+                    <p>Need help accessing your account? <br><a href="../index.html#contact">Contact the gym</a></p>
+                </div>
+            </div>
+            
+            <!-- Mobile Logo (Shows only on small screens) -->
+            <div class="mobile-logo">
+                <a href="../index.html">
+                    FIT<span>'N'</span>BLAZE
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo credentials removed for production -->
+
+    <!-- Backend Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+</html>

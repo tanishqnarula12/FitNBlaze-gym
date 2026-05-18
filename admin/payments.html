@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Fit N Blaze Admin – Payments">
+  <title>Payments | Fit N Blaze Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="admin-body">
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon" style="background: transparent; box-shadow: none;"><img src="../assets/FNB%20logo.png" alt="Logo" style="width: 100%; height: 100%; object-fit: contain;"></div>
+      <div class="logo-text">
+        FIT <span>'N'</span> BLAZE
+        <span class="logo-badge">Admin Panel</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Main</span>
+      <ul>
+        <li><a href="dashboard.html"><i class="fa-solid fa-gauge-high"></i>Dashboard</a></li>
+        <li><a href="members.html"><i class="fa-solid fa-users"></i>Members</a></li>
+        <li><a href="trainers.html"><i class="fa-solid fa-dumbbell"></i>Trainers</a></li>
+        <li><a href="payments.html" class="active"><i class="fa-solid fa-credit-card"></i>Payments</a></li>
+      </ul>
+      <span class="nav-section-label">General</span>
+      <ul>
+        <li><a href="../index.html"><i class="fa-solid fa-globe"></i>View Website</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="#" id="logoutLink"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+    <header class="admin-header">
+      <div class="header-left">
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle sidebar">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <span class="header-page-title">Payments</span>
+      </div>
+      <div class="header-right">
+        <span class="header-date" id="headerDate"></span>
+        <div class="header-avatar" title="Admin">GV</div>
+      </div>
+    </header>
+
+    <main class="admin-content">
+
+      <div class="page-title-block">
+        <div class="breadcrumb">Admin / <span>Payments</span></div>
+        <h1>Payment Records</h1>
+        <p>Track all incoming payments and their statuses.</p>
+      </div>
+
+      <!-- Revenue Stats -->
+      <div class="stats-grid" style="margin-bottom:24px;">
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+          <div class="stat-label">Total Revenue</div>
+          <div class="stat-value" data-count="0" data-prefix="₹">₹0</div>
+          <div class="stat-change up"><i class="fa-solid fa-arrow-trend-up"></i> Live updates</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-circle-check"></i></div>
+          <div class="stat-label">Paid</div>
+          <div class="stat-value" data-count="0">0</div>
+          <div class="stat-change up"><i class="fa-solid fa-arrow-trend-up"></i> Live updates</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="stat-label">Pending</div>
+          <div class="stat-value" data-count="0">0</div>
+          <div class="stat-change"><i class="fa-solid fa-minus"></i> Live updates</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon"><i class="fa-solid fa-circle-xmark"></i></div>
+          <div class="stat-label">Failed</div>
+          <div class="stat-value" data-count="0">0</div>
+          <div class="stat-change down"><i class="fa-solid fa-arrow-trend-down"></i> Live updates</div>
+        </div>
+      </div>
+
+      <!-- Payments Table -->
+      <div class="section-card">
+        <div class="section-card-header">
+          <h2><i class="fa-solid fa-receipt text-accent" style="margin-right:8px"></i>All Transactions</h2>
+        </div>
+
+        <div class="table-toolbar">
+          <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="tableSearch" placeholder="Search member, amount…">
+          </div>
+          <div class="filter-group">
+            <select class="filter-select" id="statusFilter">
+              <option value="">All Status</option>
+              <option value="paid">Paid</option>
+              <option value="pending">Pending</option>
+              <option value="failed">Failed</option>
+            </select>
+            <select class="filter-select">
+              <option value="">All Months</option>
+              <option value="apr">April 2026</option>
+              <option value="mar">March 2026</option>
+              <option value="feb">February 2026</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section-card-body">
+          <table class="admin-table" id="mainTable">
+            <thead>
+              <tr>
+                <th>Txn ID</th>
+                <th>Member Name</th>
+                <th>Plan</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="paymentsTableBody">
+              <!-- Dynamically populated from JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer" id="paymentsTableFooter">
+          <span id="paymentsCount">Loading transactions...</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Backend Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

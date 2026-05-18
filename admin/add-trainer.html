@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Trainer | Fit 'N' Blaze Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin-forms.css">
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- Admin Navbar -->
+    <nav class="admin-navbar">
+        <a href="trainers.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Dashboard</a>
+        <div class="logo">FIT<span>'N'</span>BLAZE</div>
+    </nav>
+
+    <div class="form-container">
+        
+        <header class="page-header">
+            <h1>Add New Trainer</h1>
+            <p>Register a trainer and grant dashboard access.</p>
+        </header>
+
+        <form id="addTrainerForm">
+            
+            <!-- Section 1: Personal Details -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-user"></i> Personal Details</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" placeholder="e.g. Vikram Rathore" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="email" placeholder="vikram@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Date of Birth <span class="required">*</span></label>
+                        <input type="date" id="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender <span class="required">*</span></label>
+                        <select id="gender" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Professional Information -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-briefcase"></i> Professional Information</h2>
+                
+                <div class="form-group full-width">
+                    <label>Core Specialization <span class="required">*</span></label>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="specialization" value="Gym / Cardio" required>
+                            <span>Gym / Cardio</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="specialization" value="MMA / Boxing">
+                            <span>MMA / Boxing</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="specialization" value="Yoga">
+                            <span>Yoga</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="specialization" value="CrossFit">
+                            <span>CrossFit</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="specialization" value="Self Defence">
+                            <span>Self Defence</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="specialization" value="Dance / Zumba">
+                            <span>Dance / Zumba</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-grid" style="margin-top: 1.5rem;">
+                    <div class="form-group">
+                        <label>Experience (Years) <span class="required">*</span></label>
+                        <input type="number" id="experience" placeholder="e.g. 5" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Certifications</label>
+                        <input type="text" id="certifications" placeholder="ACE, NASM, Crossfit etc.">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Bio / Notes</label>
+                        <textarea id="bio" placeholder="Brief professional background or internal notes..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Employment Details -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-file-contract"></i> Employment Details</h2>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Joining Date <span class="required">*</span></label>
+                        <input type="date" id="joinDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Status <span class="required">*</span></label>
+                        <select id="empStatus" required>
+                            <option value="Active" selected>Active</option>
+                            <option value="Inactive">Inactive</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Monthly Salary / Retainer (₹)</label>
+                        <input type="number" id="salary" placeholder="0">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Account Summary -->
+            <section class="form-section">
+                <h2 class="section-title"><i class="fa-solid fa-shield-halved"></i> Account Summary</h2>
+                
+                <div class="summary-box">
+                    <div class="summary-item">
+                        <span class="summary-label">Generated Trainer ID</span>
+                        <span class="summary-value highlight" id="generatedTrainerId">TRN---</span>
+                    </div>
+                    <div class="summary-item" style="text-align: right;">
+                        <span class="summary-label">Login Method</span>
+                        <span class="summary-value" style="font-size: 1.1rem; font-family: 'Poppins', sans-serif;">Trainer ID + Phone</span>
+                    </div>
+                </div>
+            </section>
+
+        </form>
+    </div>
+
+    <!-- Sticky Action Bar -->
+    <div class="sticky-action-bar" id="actionBar">
+        <button type="button" class="btn btn-primary" id="btnSubmitTrainer">Create Trainer Account <i class="fa-solid fa-check"></i></button>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="success-modal">
+            <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+            <h2>Trainer Added!</h2>
+            <p>The trainer account has been created successfully.</p>
+            <button class="btn btn-primary" onclick="window.location.href='trainers.html'">Go to Trainers List</button>
+        </div>
+    </div>
+
+    <!-- Backend Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/admin-forms.js"></script>
+    <script>
+        // Init Trainer specific logic
+        document.addEventListener('DOMContentLoaded', () => {
+            initTrainerForm();
+        });
+    </script>
+</body>
+</html>

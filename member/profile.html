@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | Fit 'N' Blaze</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/member.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-logo">
+                <img src="../assets/FNB logo.png" alt="FIT 'N' BLAZE Logo" class="sidebar-logo-img"> FIT<span>'N'</span>BLAZE
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fa-solid fa-border-all"></i> Dashboard
+            </a>
+            <a href="membership.html" class="nav-item">
+                <i class="fa-solid fa-id-card"></i> Membership
+            </a>
+            <a href="profile.html" class="nav-item active">
+                <i class="fa-solid fa-user"></i> Profile
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="../index.html" class="nav-item">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="welcome-msg">My Profile</h1>
+            </div>
+            <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
+                <!-- Notifications Dropdown -->
+                <div class="notifications-wrapper" style="position: relative;">
+                    <button class="notification-btn" id="notifToggle">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="notif-badge">3</span>
+                    </button>
+                    <div class="notifications-dropdown" id="notifDropdown">
+                        <div class="notif-header">
+                            <h3>Notifications</h3>
+                            <span class="mark-read">Mark all as read</span>
+                        </div>
+                        <div class="notif-body" id="notifList">
+                            <!-- Dynamic notifications loaded via JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <a href="profile.html" style="text-decoration: none;">
+                    <div class="profile-avatar">--</div>
+                </a>
+            </div>
+        </header>
+
+        <!-- Dashboard Container -->
+        <div class="dashboard-container">
+            
+            <div class="two-col">
+                <!-- Basic Profile Section -->
+                <div class="card animate-in delay-1">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-solid fa-user"></i> Personal Details</h2>
+                    </div>
+                    <div class="membership-details">
+                        <div class="mem-row">
+                            <span class="mem-label">Full Name</span>
+                            <span class="mem-val">Loading...</span>
+                        </div>
+                        <div class="mem-row">
+                            <span class="mem-label">Email</span>
+                            <span class="mem-val">Loading...</span>
+                        </div>
+                        <div class="mem-row">
+                            <span class="mem-label">Phone</span>
+                            <span class="mem-val">Loading...</span>
+                        </div>
+                        <div class="mem-row">
+                            <span class="mem-label">Date of Birth</span>
+                            <span class="mem-val">Loading...</span>
+                        </div>
+                        <div class="mem-row">
+                            <span class="mem-label">Gender</span>
+                            <span class="mem-val">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Emergency Contact -->
+                <div class="card animate-in delay-2">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-solid fa-truck-medical"></i> Emergency Contact</h2>
+                        <button class="btn-icon" title="Edit Contact"><i class="fa-solid fa-pen"></i></button>
+                    </div>
+                    <div class="membership-details">
+                        <div class="mem-row">
+                            <span class="mem-label">Contact Name</span>
+                            <span class="mem-val">Loading...</span>
+                        </div>
+                        <div class="mem-row">
+                            <span class="mem-label">Relationship</span>
+                            <span class="mem-val">Loading...</span>
+                        </div>
+                        <div class="mem-row">
+                            <span class="mem-label">Phone</span>
+                            <span class="mem-val">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Backend Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/member.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trainer Dashboard | Fit 'N' Blaze</title>
+  
+  <!-- Fonts: Poppins for the cool Admin theme match -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS (Mirroring the premium admin theme) -->
+  <link rel="stylesheet" href="../css/trainer.css">
+</head>
+<body class="trainer-body">
+
+  <!-- Sidebar Overlay for mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Sidebar -->
+  <aside class="trainer-sidebar" id="trainerSidebar">
+    <!-- Logo -->
+    <div class="sidebar-logo" style="display: flex; align-items: center; gap: 12px;">
+      <img src="../assets/FNB logo.png" alt="FIT 'N' BLAZE Logo" style="height: 38px; width: auto; object-fit: contain;">
+      <div>
+        <div class="logo-text">FIT<span>'N'</span>BLAZE</div>
+        <span class="logo-badge">Trainer Portal</span>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Overview</div>
+      <ul>
+        <li><a href="#" id="navLinkDashboard" class="active"><i class="fa-solid fa-border-all"></i> Dashboard</a></li>
+        <li><a href="#" id="navLinkSlots"><i class="fa-solid fa-calendar-days"></i> Manage PT Slots</a></li>
+        <li><a href="#" id="navLinkProfile"><i class="fa-solid fa-user-gear"></i> Profile</a></li>
+      </ul>
+    </nav>
+
+    <!-- Footer / Logout -->
+    <div class="sidebar-footer">
+      <a href="../index.html" id="logoutLink"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </div>
+  </aside>
+
+  <!-- Main Wrapper -->
+  <div class="trainer-main">
+    
+    <!-- Top Header -->
+    <header class="trainer-header">
+      <div class="header-left">
+        <button class="hamburger-btn" id="menuToggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <span class="header-page-title" id="headerPageTitle">Trainer Dashboard</span>
+      </div>
+      <div class="header-right">
+        <span class="header-date" id="headerDate"></span>
+        <div class="header-avatar" title="Trainer">--</div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="trainer-content">
+
+      <!-- ============================================ -->
+      <!-- DASHBOARD VIEW -->
+      <!-- ============================================ -->
+      <div id="dashboardView">
+        <!-- Page Title -->
+        <div class="page-title-block">
+          <div class="breadcrumb">Trainer / <span>Dashboard</span></div>
+          <h1 id="trainerGreeting">Welcome back 👋</h1>
+          <p>Here's your schedule and assigned members for today.</p>
+        </div>
+
+        <!-- Alert Strip -->
+        <div class="alert-strip" style="display:none;" id="trainerAlertStrip">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span id="trainerAlertMsg">No pending updates.</span>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr);">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-users"></i></div>
+            <div class="stat-label">Assigned Members</div>
+            <div class="stat-value" id="statAssignedMembers">0</div>
+            <div class="stat-change up"><i class="fa-solid fa-arrow-trend-up"></i> Live updates</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-calendar-check"></i></div>
+            <div class="stat-label">Today's Sessions</div>
+            <div class="stat-value" id="statTodaySessions">0</div>
+            <div class="stat-change up"><i class="fa-solid fa-arrow-trend-up"></i> Live updates</div>
+          </div>
+        </div>
+
+        <!-- 2-col row -->
+        <div class="dashboard-2col">
+
+          <!-- Assigned Members Table -->
+          <div class="section-card">
+            <div class="section-card-header">
+              <h2><i class="fa-solid fa-clipboard-user text-accent" style="margin-right:8px"></i>Assigned Members Overview</h2>
+            </div>
+            <div class="section-card-body">
+              <table class="trainer-table">
+                <thead>
+                  <tr>
+                    <th>Member</th>
+                    <th>Goal</th>
+                    <th>Progress</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="assignedMembersTbody">
+                  <tr>
+                    <td colspan="4" style="text-align:center;padding:25px;color:#888;">
+                      <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i> Loading assigned members...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Today's Schedule (Mini list) -->
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div class="section-card">
+              <div class="section-card-header">
+                <h2><i class="fa-solid fa-clock text-accent" style="margin-right:8px"></i>Today's Sessions</h2>
+              </div>
+              <div class="section-card-body">
+                <div class="mini-stat-list" id="sessionsList">
+                  <div style="text-align:center;padding:25px;color:#888;">
+                    <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i> Loading sessions...
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============================================ -->
+      <!-- PROFILE VIEW -->
+      <!-- ============================================ -->
+      <div id="profileView" style="display: none;">
+        <!-- Page Title -->
+        <div class="page-title-block">
+          <div class="breadcrumb">Trainer / <span>My Profile</span></div>
+          <h1>My Profile Settings</h1>
+          <p>View and manage your specialization, qualifications, and personal details.</p>
+        </div>
+
+        <div class="section-card" style="max-width: 800px; margin: 0 auto;">
+          <div class="section-card-header">
+            <h2><i class="fa-solid fa-user-gear text-accent" style="margin-right:8px"></i>Edit Profile Information</h2>
+          </div>
+          <div class="section-card-body" style="padding: 30px;">
+            <form id="trainerProfileForm" style="display:flex; flex-direction:column; gap:20px;">
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                  <label style="font-size:11px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Full Name</label>
+                  <input type="text" id="profFullName" placeholder="Trainer Full Name" required 
+                    style="background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 16px; color:var(--text-primary); font-family:inherit; font-size:14px; outline:none; transition:border-color var(--transition);">
+                </div>
+                
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                  <label style="font-size:11px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Phone Number</label>
+                  <input type="tel" id="profPhone" placeholder="10-digit Phone" required pattern="[0-9]{10}"
+                    style="background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 16px; color:var(--text-primary); font-family:inherit; font-size:14px; outline:none; transition:border-color var(--transition);">
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                  <label style="font-size:11px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Email Address</label>
+                  <input type="email" id="profEmail" placeholder="Email Address"
+                    style="background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 16px; color:var(--text-primary); font-family:inherit; font-size:14px; outline:none; transition:border-color var(--transition);">
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                  <label style="font-size:11px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Trainer Code</label>
+                  <input type="text" id="profCode" disabled
+                    style="background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 16px; color:var(--text-faint); font-family:inherit; font-size:14px; cursor:not-allowed; outline:none;">
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns: 2fr 1fr; gap:20px;">
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                  <label style="font-size:11px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Specialization</label>
+                  <input type="text" id="profSpecialization" placeholder="e.g. Strength, Cardio, Crossfit"
+                    style="background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 16px; color:var(--text-primary); font-family:inherit; font-size:14px; outline:none; transition:border-color var(--transition);">
+                </div>
+
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                  <label style="font-size:11px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Experience (Years)</label>
+                  <input type="number" id="profExperience" min="0" placeholder="Years"
+                    style="background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 16px; color:var(--text-primary); font-family:inherit; font-size:14px; outline:none; transition:border-color var(--transition);">
+                </div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; gap:6px;">
+                <label style="font-size:11px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Certifications & Accreditations</label>
+                <textarea id="profCertifications" placeholder="List your professional fitness certifications..." rows="3"
+                  style="background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 16px; color:var(--text-primary); font-family:inherit; font-size:14px; resize:vertical; min-height:80px; outline:none; transition:border-color var(--transition);"></textarea>
+              </div>
+
+              <button type="submit" class="btn-trainer btn-trainer-primary" id="btnSaveProfile" style="width: 100%; border:none; padding:14px; border-radius:var(--radius-sm); font-size:14px; font-weight:600; margin-top:10px; cursor:pointer;">
+                <i class="fa-solid fa-floppy-disk" style="margin-right:6px;"></i> Save Profile Changes
+              </button>
+              <div id="profileFormMsg" style="display:none; text-align:center; padding:12px; font-size:14px; border-radius:var(--radius-sm); margin-top:4px;"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================ -->
+      <!-- MANAGE PT SLOTS VIEW -->
+      <!-- ============================================ -->
+      <div id="slotsView" style="display: none;">
+        <!-- Page Title -->
+        <div class="page-title-block">
+          <div class="breadcrumb">Trainer / <span>Manage PT Slots</span></div>
+          <h1>My Available PT Slots</h1>
+          <p>Select the daily personal training slots you are available to host. Users will only be able to book sessions during these times.</p>
+        </div>
+
+        <div class="section-card" style="max-width: 800px; margin: 0 auto;">
+          <div class="section-card-header">
+            <h2><i class="fa-solid fa-calendar-days text-accent" style="margin-right:8px"></i>Define Your PT Schedule</h2>
+          </div>
+          <div class="section-card-body" style="padding: 30px;">
+            <form id="trainerSlotsForm" style="display:flex; flex-direction:column; gap:20px;">
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <label style="font-size:11px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Select Active Slots</label>
+                <div id="trainerSlotsContainer" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; background: rgba(255,255,255,0.02); padding: 20px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                  <!-- Custom checkboxes populated dynamically -->
+                </div>
+              </div>
+
+              <button type="submit" class="btn-trainer btn-trainer-primary" id="btnSaveSlots" style="width: 100%; border:none; padding:14px; border-radius:var(--radius-sm); font-size:14px; font-weight:600; margin-top:10px; cursor:pointer;">
+                <i class="fa-solid fa-floppy-disk" style="margin-right:6px;"></i> Save Available Slots
+              </button>
+              <div id="slotsFormMsg" style="display:none; text-align:center; padding:12px; font-size:14px; border-radius:var(--radius-sm); margin-top:4px;"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div><!-- /.trainer-main -->
+
+  <!-- Backend Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/trainer.js"></script>
+</body>
+</html>
