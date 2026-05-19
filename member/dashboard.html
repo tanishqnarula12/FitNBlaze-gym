@@ -312,7 +312,7 @@
                         <h3 style="margin: 0 0 8px 0; font-size: 16px; color: var(--text-main);">Refer a Friend</h3>
                         <p style="margin: 0 0 16px 0; font-size: 13px; color: var(--text-muted); line-height: 1.4;">Workout buddies make the best motivation. Invite a friend to join the gym today!</p>
                         
-                        <button class="btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px;">
+                        <button class="btn-primary" onclick="if(navigator.share){ navigator.share({title: 'Join Fit N Blaze', text: 'Join me at Fit N Blaze Gym!', url: 'https://www.fitnblazegym.com'}); } else { navigator.clipboard.writeText('https://www.fitnblazegym.com'); alert('Link copied to clipboard!'); }" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px;">
                             <i class="fa-solid fa-share-nodes"></i> Share Invite Link
                         </button>
                     </div>
@@ -321,14 +321,14 @@
                     <div class="card animate-in delay-6" style="padding: 24px 20px; flex: 1; display: flex; flex-direction: column; justify-content: center;">
                         <h3 style="margin: 0 0 8px 0; font-size: 16px; color: var(--text-main); display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-star" style="color: var(--warning);"></i> Rate Your Experience</h3>
                         <p style="margin: 0 0 16px 0; font-size: 13px; color: var(--text-muted);">How are you enjoying Fit 'N' Blaze?</p>
-                        <div style="display: flex; gap: 8px; font-size: 24px; color: #3f3f46; cursor: pointer; margin-bottom: 16px;">
+                        <div onclick="window.open('https://www.google.com/search?hl=en-IN&gl=in&q=FIT+N+BLAZE,+Gulati+Residancy,+2A,+near+S+J+PUBLIC+SCHOOL,+Janta+Colony,+Janata+Colony,+Jaipur,+Rajasthan+302004&ludocid=3936504756668504819&lsig=AB86z5V6oi6GTe0mx06laIlv9DZ5&ibp=gwp%3B0,7&hl=en&gl=IN#lkt=LocalPoiReviews&lpg=cid:CgIgAQ%3D%3D', '_blank')" style="display: flex; gap: 8px; font-size: 24px; color: #3f3f46; cursor: pointer; margin-bottom: 16px;">
                             <i class="fa-solid fa-star hover-star" onmouseover="this.style.color='var(--warning)'" onmouseout="this.style.color='#3f3f46'"></i>
                             <i class="fa-solid fa-star hover-star" onmouseover="this.style.color='var(--warning)'" onmouseout="this.style.color='#3f3f46'"></i>
                             <i class="fa-solid fa-star hover-star" onmouseover="this.style.color='var(--warning)'" onmouseout="this.style.color='#3f3f46'"></i>
                             <i class="fa-solid fa-star hover-star" onmouseover="this.style.color='var(--warning)'" onmouseout="this.style.color='#3f3f46'"></i>
                             <i class="fa-solid fa-star hover-star" onmouseover="this.style.color='var(--warning)'" onmouseout="this.style.color='#3f3f46'"></i>
                         </div>
-                        <button class="btn-primary" onclick="window.open('https://www.google.com/maps/search/?api=1&query=Fit+N+Blaze', '_blank')" style="width: 100%; padding: 10px; font-size: 13px; background: transparent; color: var(--text-main); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+                        <button class="btn-primary" onclick="window.open('https://www.google.com/search?hl=en-IN&gl=in&q=FIT+N+BLAZE,+Gulati+Residancy,+2A,+near+S+J+PUBLIC+SCHOOL,+Janta+Colony,+Janata+Colony,+Jaipur,+Rajasthan+302004&ludocid=3936504756668504819&lsig=AB86z5V6oi6GTe0mx06laIlv9DZ5&ibp=gwp%3B0,7&hl=en&gl=IN#lkt=LocalPoiReviews&lpg=cid:CgIgAQ%3D%3D', '_blank')" style="width: 100%; padding: 10px; font-size: 13px; background: transparent; color: var(--text-main); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
                             <i class="fa-brands fa-google"></i> Review on Maps
                         </button>
                     </div>
