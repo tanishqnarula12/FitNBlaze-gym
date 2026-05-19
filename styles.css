@@ -318,6 +318,9 @@ img {
 
 .about-img {
   width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  object-position: top center;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-primary);
   filter: grayscale(20%);

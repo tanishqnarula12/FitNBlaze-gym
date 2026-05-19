@@ -7,9 +7,9 @@
   'use strict';
 
   /* ---- Sidebar toggle (mobile) ---- */
-  const sidebar    = document.getElementById('adminSidebar');
+  const sidebar    = document.getElementById('trainerSidebar');
   const overlay    = document.getElementById('sidebarOverlay');
-  const hamburger  = document.getElementById('hamburgerBtn');
+  const hamburger  = document.getElementById('menuToggle');
 
   function openSidebar()  { sidebar?.classList.add('open'); overlay?.classList.add('visible'); }
   function closeSidebar() { sidebar?.classList.remove('open'); overlay?.classList.remove('visible'); }

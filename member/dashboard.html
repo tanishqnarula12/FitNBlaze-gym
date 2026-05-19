@@ -76,6 +76,11 @@
 
         <!-- Dashboard Container -->
         <div class="dashboard-container" id="dashboard">
+            <!-- Mobile Badges Container (visible on mobile only) -->
+            <div class="mobile-badges-container">
+                <span class="badge badge-goal"><i class="fa-solid fa-bullseye"></i> --</span>
+                <span class="badge badge-status"><i class="fa-solid fa-circle-check"></i> --</span>
+            </div>
             
             <!-- PT Scheduler Card -->
             <div class="card pt-scheduler-card animate-in" style="background: linear-gradient(135deg, rgba(229, 9, 20, 0.08) 0%, rgba(20, 20, 20, 0.95) 100%); border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; margin-bottom: 20px; flex-wrap: wrap;">
@@ -237,32 +242,41 @@
                     </ul>
                 </div>
 
-                <!-- Diet Plan -->
+                <!-- Diet Plans Download Section -->
                 <div class="card animate-in delay-4" id="diet">
-                    <div class="card-header">
-                        <h2 class="card-title"><i class="fa-solid fa-utensils"></i> Daily Nutrition Plan</h2>
-                        <button class="btn-icon" title="Customize Diet Plan"><i class="fa-solid fa-pen"></i></button>
+                    <div class="card-header" style="margin-bottom: 20px;">
+                        <h2 class="card-title"><i class="fa-solid fa-utensils"></i> Download Diet Plans</h2>
                     </div>
-                    <ul class="plan-list">
-                        <li class="plan-item">
-                            <span class="diet-time">Breakfast</span>
-                            <span class="plan-desc">Oats + Eggs</span>
-                        </li>
-                        <li class="plan-item">
-                            <span class="diet-time">Lunch</span>
-                            <span class="plan-desc">Grilled Chicken / Paneer + Rice</span>
-                        </li>
-                        <li class="plan-item">
-                            <span class="diet-time">Evening</span>
-                            <span class="plan-desc">Protein Shake</span>
-                        </li>
-                        <li class="plan-item">
-                            <span class="diet-time">Dinner</span>
-                            <span class="plan-desc">Salad + Lean Protein</span>
-                        </li>
-                    </ul>
-
-
+                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                        <a href="../assets/Non veg weight gain.pdf" download class="diet-download-item">
+                            <div class="diet-info">
+                                <span class="diet-icon-box nv-gain"><i class="fa-solid fa-drumstick-bite"></i></span>
+                                <span class="diet-name">Non-Veg Weight Gain</span>
+                            </div>
+                            <span class="diet-dl-btn"><i class="fa-solid fa-circle-down"></i></span>
+                        </a>
+                        <a href="../assets/Non veg Weight loss.pdf" download class="diet-download-item">
+                            <div class="diet-info">
+                                <span class="diet-icon-box nv-loss"><i class="fa-solid fa-drumstick-bite"></i></span>
+                                <span class="diet-name">Non-Veg Weight Loss</span>
+                            </div>
+                            <span class="diet-dl-btn"><i class="fa-solid fa-circle-down"></i></span>
+                        </a>
+                        <a href="../assets/Veg weight gain diet.pdf" download class="diet-download-item">
+                            <div class="diet-info">
+                                <span class="diet-icon-box v-gain"><i class="fa-solid fa-seedling"></i></span>
+                                <span class="diet-name">Veg Weight Gain</span>
+                            </div>
+                            <span class="diet-dl-btn"><i class="fa-solid fa-circle-down"></i></span>
+                        </a>
+                        <a href="../assets/Veg weight loss.pdf" download class="diet-download-item">
+                            <div class="diet-info">
+                                <span class="diet-icon-box v-loss"><i class="fa-solid fa-seedling"></i></span>
+                                <span class="diet-name">Veg Weight Loss</span>
+                            </div>
+                            <span class="diet-dl-btn"><i class="fa-solid fa-circle-down"></i></span>
+                        </a>
+                    </div>
                 </div>
             </div>
 

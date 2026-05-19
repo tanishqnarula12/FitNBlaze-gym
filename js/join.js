@@ -336,7 +336,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             status: 'active',
                             dietary_preferences: formData.dietary,
                             membership_start: startDateObj.toISOString().split('T')[0],
-                            membership_end: membershipEnd
+                            membership_end: membershipEnd,
+                            medical_notes: JSON.stringify({ experience: formData.experience || 'beginner', completed_days: [] })
                         }]).select().single();
 
                         if (memberError) throw memberError;

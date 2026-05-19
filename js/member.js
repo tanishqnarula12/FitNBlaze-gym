@@ -23,6 +23,44 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const defaultWorkoutTemplate = 'Monday: Chest & Triceps\nTuesday: Back & Biceps\nWednesday: Cardio & Core\nThursday: Legs\nFriday: Shoulders\nSaturday: Functional Training\nSunday: Rest';
 
+    const WORKOUT_EXERCISES = {
+        "Chest & Triceps": {
+            beginner: ["Push-Ups – 3 x 10", "Incline Dumbbell Press – 3 x 12", "Cable Fly – 3 x 12", "Tricep Pushdowns – 3 x 15", "Bench Dips – 3 x 12"],
+            intermediate: ["Barbell Bench Press – 4 x 10", "Incline Dumbbell Press – 4 x 10", "Decline Hammer Press – 3 x 12", "Cable Crossover – 3 x 15", "Overhead Dumbbell Extension – 3 x 12", "Skull Crushers – 3 x 12"],
+            advanced: ["Barbell Bench Press (Heavy) – 5 x 6-8", "Incline Dumbbell Press – 4 x 8-10 (Drop set on last set)", "Weighted Dips – 4 x 10", "Cable Fly (High-to-Low) – 3 x 12 (Superset with Low-to-High)", "Close Grip Bench Press – 4 x 8", "Weighted Skull Crushers – 3 x 10", "Rope Pushdowns – 3 x 15 (Drop set on last set)"]
+        },
+        "Back & Biceps": {
+            beginner: ["Lat Pulldowns – 3 x 12", "Seated Cable Row – 3 x 12", "Dumbbell Bicep Curl – 3 x 15", "Hammer Curl – 3 x 12", "Back Extensions – 3 x 12"],
+            intermediate: ["Deadlift – 4 x 8", "Bent Over Barbell Row – 4 x 10", "Lat Pulldown (Wide Grip) – 3 x 12", "Incline Dumbbell Curl – 3 x 12", "Barbell Preacher Curl – 3 x 12", "Hammer Curl – 3 x 12"],
+            advanced: ["Deadlift (Heavy) – 5 x 5", "Weighted Pull-ups – 4 x 8", "Meadows Row / T-Bar Row – 4 x 8-10", "Chest-Supported Row – 3 x 12 (Superset with Lat Pullover)", "Incline Dumbbell Curl – 4 x 10", "Spider Curl – 3 x 12", "Hammer Curl (Heavy) – 3 x 10 (Drop set on last set)"]
+        },
+        "Legs": {
+            beginner: ["Bodyweight Squats – 3 x 15", "Leg Press – 3 x 12", "Lying Leg Curl – 3 x 12", "Standing Calf Raise – 3 x 15"],
+            intermediate: ["Barbell Squat – 4 x 10", "Romanian Deadlift – 4 x 10", "Bulgarian Split Squat – 3 x 12 per leg", "Lying Leg Curl – 3 x 15", "Calf Raise (Seated) – 4 x 15"],
+            advanced: ["Barbell Back Squat (Heavy) – 5 x 6-8", "Deficit Romanian Deadlift – 4 x 8-10", "Bulgarian Split Squat (Weighted) – 4 x 10 per leg (Superset with Bodyweight Jump Squats)", "Leg Extension – 3 x 15 (Drop set on last set)", "Lying Leg Curl – 3 x 12 (Superset with Seated Calf Raise)", "Donkey Calf Raise – 4 x 20"]
+        },
+        "Shoulders": {
+            beginner: ["Dumbbell Shoulder Press – 3 x 12", "Dumbbell Lateral Raise – 3 x 15", "Dumbbell Front Raise – 3 x 12", "Face Pulls – 3 x 15"],
+            intermediate: ["Overhead Press (OHP) – 4 x 8", "Dumbbell Lateral Raise – 4 x 12", "Seated Dumbbell Press – 3 x 10", "Reverse Pec Deck Fly – 3 x 15", "Dumbbell Shrugs – 3 x 12"],
+            advanced: ["Overhead Press (Heavy) – 5 x 5", "Dumbbell Lateral Raise (Heavy) – 4 x 12 (Drop set on last set)", "Behind-the-Neck Barbell Press – 3 x 10", "Cable Lateral Raise – 3 x 15 (Superset with Face Pulls)", "Dumbbell Rear Delt Fly – 4 x 12", "Barbell Shrugs (Heavy) – 4 x 8"]
+        },
+        "Cardio & Core": {
+            beginner: ["Treadmill Walk (Incline) – 20 mins", "Bicycle Crunches – 3 x 15", "Plank – 3 x 30 secs", "Lying Leg Raises – 3 x 12"],
+            intermediate: ["Treadmill Jog – 25 mins", "Hanging Knee Raise – 3 x 15", "Plank – 3 x 60 secs", "Russian Twist (Weighted) – 3 x 20 (10 per side)"],
+            advanced: ["HIIT Sprint Intervals – 20 mins (30s sprint, 60s walk)", "Hanging Leg Raise (Toes to Bar) – 4 x 12", "Weighted Plank – 3 x 90 secs", "Ab Wheel Rollout – 3 x 12", "Russian Twist (Weighted) – 3 x 30"]
+        },
+        "Functional Training": {
+            beginner: ["Kettlebell Swings – 3 x 15", "Goblet Squat – 3 x 12", "Dumbbell Farmer's Walk – 3 x 50 meters", "Mountain Climbers – 3 x 30 secs"],
+            intermediate: ["Kettlebell Swings (Heavy) – 4 x 15", "Goblet Squat – 4 x 12", "Medicine Ball Slams – 4 x 12", "Burpees – 3 x 12", "Farmer's Walk (Heavy) – 3 x 50 meters"],
+            advanced: ["Kettlebell Snatch – 4 x 10 per arm", "Barbell Clean & Press – 4 x 8", "Burpee Pull-Ups – 4 x 10", "Sandbag / Heavy D-Ball Carry – 3 x 50 meters", "Battle Ropes – 4 x 45 secs"]
+        },
+        "Rest": {
+            beginner: ["Active Recovery – Light walk or stretching"],
+            intermediate: ["Active Recovery – Light walk or stretching"],
+            advanced: ["Active Recovery – Light walk or stretching"]
+        }
+    };
+
     // Premium Custom Modal UI
     function showCustomModal(title, fields, onSave) {
         const existing = document.getElementById('customOverlay');
@@ -38,6 +76,20 @@ document.addEventListener('DOMContentLoaded', async () => {
                 inputsHtml += `<div style="margin-bottom:15px;text-align:left;">
                     <label style="display:block;color:#aaa;font-size:12px;margin-bottom:5px;">${f.label}</label>
                     <textarea id="modInp_${i}" style="width:100%;height:150px;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:12px;border-radius:8px;resize:vertical;font-family:inherit;">${f.value||''}</textarea>
+                </div>`;
+            } else if (f.type === 'select') {
+                let optionsHtml = '';
+                if (f.options) {
+                    f.options.forEach(opt => {
+                        const isSelected = (opt.toLowerCase() === (f.value || '').toLowerCase()) ? 'selected' : '';
+                        optionsHtml += `<option value="${opt}" ${isSelected}>${opt}</option>`;
+                    });
+                }
+                inputsHtml += `<div style="margin-bottom:15px;text-align:left;">
+                    <label style="display:block;color:#aaa;font-size:12px;margin-bottom:5px;">${f.label}</label>
+                    <select id="modInp_${i}" style="width:100%;background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);color:#fff;padding:12px;border-radius:8px;font-family:inherit;">
+                        ${optionsHtml}
+                    </select>
                 </div>`;
             } else {
                 inputsHtml += `<div style="margin-bottom:15px;text-align:left;">
@@ -305,7 +357,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Update Global Elements
             document.querySelectorAll('.welcome-msg').forEach(el => {
-                if(isDashboard) el.textContent = `Welcome back, ${firstName}!`;
+                if(isDashboard) {
+                    if (window.innerWidth <= 576) {
+                        el.textContent = `Hi, ${firstName}!`;
+                    } else {
+                        el.textContent = `Welcome back, ${firstName}!`;
+                    }
+                }
             });
             document.querySelectorAll('.profile-avatar').forEach(el => {
                 el.textContent = name.substring(0, 2).toUpperCase();
@@ -495,9 +553,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 }
 
-                // Header Badges
-                const badgeGoal = document.querySelector('.badge-goal');
-                if (badgeGoal) badgeGoal.innerHTML = `<i class="fa-solid fa-bullseye"></i> ${memberData.goal || 'Fitness'}`;
+                // Header & Mobile Badges
+                document.querySelectorAll('.badge-goal').forEach(el => {
+                    el.innerHTML = `<i class="fa-solid fa-bullseye"></i> ${memberData.goal || 'Fitness'}`;
+                });
+
+                const isActive = memberData.status === 'active' && expiryDate && new Date(expiryDate) >= new Date().setHours(0,0,0,0);
+                document.querySelectorAll('.badge-status').forEach(el => {
+                    if (isActive) {
+                        el.className = 'badge badge-status';
+                        el.innerHTML = `<i class="fa-solid fa-circle-check"></i> Active`;
+                    } else {
+                        el.className = 'badge badge-status expired';
+                        el.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Expired`;
+                    }
+                });
 
                 // Summary Card
                 const summaryValues = document.querySelectorAll('.hero-summary .summary-value');
@@ -523,6 +593,24 @@ document.addEventListener('DOMContentLoaded', async () => {
                         statValues[4].textContent = (currentW / (hM * hM)).toFixed(1);
                     } else {
                         statValues[4].textContent = '--';
+                    }
+
+                    // Dynamically update the Weight Diff card label and icon based on goal type (Loss vs Gain)
+                    const diffCardIcon = document.querySelector('.stats-grid .stat-card:nth-child(3) .stat-icon');
+                    const diffCardLabel = document.querySelector('.stats-grid .stat-card:nth-child(3) .stat-label');
+                    if (diffCardLabel) {
+                        diffCardLabel.textContent = isLossGoal ? 'Weight Lost' : 'Weight Gained';
+                    }
+                    if (diffCardIcon) {
+                        if (isLossGoal) {
+                            diffCardIcon.style.color = 'var(--success)';
+                            diffCardIcon.style.backgroundColor = 'rgba(46, 204, 113, 0.1)';
+                            diffCardIcon.innerHTML = '<i class="fa-solid fa-arrow-trend-down"></i>';
+                        } else {
+                            diffCardIcon.style.color = '#3498db';
+                            diffCardIcon.style.backgroundColor = 'rgba(52, 152, 219, 0.1)';
+                            diffCardIcon.innerHTML = '<i class="fa-solid fa-arrow-trend-up"></i>';
+                        }
                     }
                 }
 
@@ -1174,10 +1262,23 @@ document.addEventListener('DOMContentLoaded', async () => {
             const existingBar = workoutContainer.querySelector('.weekly-completion-tracker');
             if (existingBar) existingBar.remove();
 
+            const currentLevel = (medicalNotesObj && medicalNotesObj.experience) ? medicalNotesObj.experience.toLowerCase() : 'beginner';
             const trackerBarHtml = `
                 <div class="weekly-completion-tracker" style="margin-bottom: 20px; background: rgba(255,255,255,0.02); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color);">
-                    <div style="display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">
-                        <span>Weekly Workout Completion</span>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <div style="font-size: 13px; color: var(--text-muted);">
+                            <span>Weekly Workout Completion</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 12px; color: var(--text-muted);">Level:</span>
+                            <select id="workoutLevelToggle" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 12px; outline: none; cursor: pointer; transition: all 0.2s;">
+                                <option value="beginner" ${currentLevel === 'beginner' ? 'selected' : ''} style="color: black;">Beginner</option>
+                                <option value="intermediate" ${currentLevel === 'intermediate' ? 'selected' : ''} style="color: black;">Intermediate</option>
+                                <option value="advanced" ${currentLevel === 'advanced' ? 'selected' : ''} style="color: black;">Advanced</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">
                         <span style="color: var(--success); font-weight: 600;">${completedCount} / 7 Days Completed (${completionPercent}%)</span>
                     </div>
                     <div style="height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden;">
@@ -1188,6 +1289,32 @@ document.addEventListener('DOMContentLoaded', async () => {
             const planList = workoutContainer.querySelector('.plan-list');
             if (planList) {
                 planList.insertAdjacentHTML('beforebegin', trackerBarHtml);
+                
+                const levelToggle = workoutContainer.querySelector('#workoutLevelToggle');
+                if (levelToggle) {
+                    levelToggle.addEventListener('change', async (e) => {
+                        const newLevel = e.target.value;
+                        medicalNotesObj.experience = newLevel;
+                        
+                        const originalColor = levelToggle.style.color;
+                        levelToggle.style.color = 'var(--accent-primary)';
+                        
+                        try {
+                            const { error: updateErr } = await window.db.from('members').update({
+                                medical_notes: JSON.stringify(medicalNotesObj)
+                            }).eq('id', memberId);
+                            
+                            if (updateErr) throw updateErr;
+                            
+                            location.reload();
+                        } catch (err) {
+                            console.error("Failed to update level:", err);
+                            alert("Failed to update workout level.");
+                            e.target.value = currentLevel;
+                            levelToggle.style.color = originalColor;
+                        }
+                    });
+                }
             }
         }
 
@@ -1256,41 +1383,73 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         keys.forEach(key => {
             const desc = parsedMap[key.toLowerCase()] || '';
+            const todayName = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+            const isToday = (key === todayName);
+            
+            let exercisesHtml = '';
+            if (isWorkout && desc && typeof WORKOUT_EXERCISES !== 'undefined') {
+                const level = (completionData && completionData.medicalNotesObj && completionData.medicalNotesObj.experience) ? completionData.medicalNotesObj.experience.toLowerCase() : 'beginner';
+                let matchedWorkout = null;
+                for (const wKey in WORKOUT_EXERCISES) {
+                    if (desc.toLowerCase().includes(wKey.toLowerCase())) {
+                        matchedWorkout = wKey;
+                        break;
+                    }
+                }
+                if (matchedWorkout && WORKOUT_EXERCISES[matchedWorkout][level] && isToday) {
+                    const exList = WORKOUT_EXERCISES[matchedWorkout][level];
+                    exercisesHtml = `<ul style="margin-top: 8px; margin-left: 102px; padding-left: 16px; list-style-type: disc; color: var(--text-muted); font-size: 13px;">` +
+                        exList.map(ex => `<li style="margin-bottom: 4px;">${ex}</li>`).join('') +
+                        `</ul>`;
+                }
+            }
             
             let completionHtml = '';
             if (isWorkout) {
                 const dateStr = completionData.weekDates[key];
                 
                 if (dateStr) {
-                    if (dateStr <= completionData.todayStr) {
-                        // Past or present day
-                        if (completionData.completedDays.includes(dateStr)) {
-                            // Completed state (with checkmark tick)
+                    const isCompleted = completionData.completedDays.includes(dateStr);
+                    if (isCompleted) {
+                        // Completed state
+                        if (isToday) {
                             completionHtml = `
                                 <button class="btn-toggle-completion" data-date="${dateStr}" data-action="uncheck" style="background: rgba(16, 185, 129, 0.1); border: 1px solid var(--success); color: var(--success); cursor: pointer; border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 4px; transition: all 0.2s;" onmouseover="this.style.background='rgba(239, 68, 68, 0.1)'; this.style.borderColor='var(--accent-primary)'; this.style.color='var(--accent-primary)';" onmouseout="this.style.background='rgba(16, 185, 129, 0.1)'; this.style.borderColor='var(--success)'; this.style.color='var(--success)';">
                                     <i class="fa-solid fa-circle-check"></i> Done
                                 </button>`;
                         } else {
-                            // Uncompleted state (Done button)
+                            completionHtml = `
+                                <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--success); border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 4px; opacity: 0.6; cursor: not-allowed;" title="Locked for other days">
+                                    <i class="fa-solid fa-circle-check"></i> Done
+                                </div>`;
+                        }
+                    } else {
+                        // Uncompleted state
+                        if (isToday) {
                             completionHtml = `
                                 <button class="btn-toggle-completion" data-date="${dateStr}" data-action="check" style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); cursor: pointer; border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 4px; transition: all 0.2s;" onmouseover="this.style.background='rgba(16, 185, 129, 0.1)'; this.style.borderColor='var(--success)'; this.style.color='var(--success)';" onmouseout="this.style.background='rgba(255,255,255,0.02)'; this.style.borderColor='rgba(255,255,255,0.1)'; this.style.color='var(--text-muted)';">
                                     <i class="fa-regular fa-circle"></i> Complete
                                 </button>`;
+                        } else {
+                            completionHtml = `
+                                <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 4px; opacity: 0.4; cursor: not-allowed;" title="Locked for other days">
+                                    <i class="fa-solid fa-lock"></i> Locked
+                                </div>`;
                         }
-                    } else {
-                        // Future Day
-                        completionHtml = `<div style="color: var(--text-muted); opacity: 0.15; font-size: 16px; margin-right: 4px;" title="Pending"><i class="fa-regular fa-circle"></i></div>`;
                     }
                 }
             }
 
             ulElement.innerHTML += `
-                <li class="plan-item" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%;">
-                    <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
-                        <span class="${isWorkout ? 'plan-day' : 'diet-time'}" style="font-weight:600;min-width:90px">${key}</span>
-                        <span class="plan-desc">${desc}</span>
+                <li class="plan-item" style="display: flex; flex-direction: column; width: 100%;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%;">
+                        <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
+                            <span class="${isWorkout ? 'plan-day' : 'diet-time'}" style="font-weight:600;min-width:90px">${key}</span>
+                            <span class="plan-desc">${desc}</span>
+                        </div>
+                        ${completionHtml ? `<div class="completion-col" style="flex-shrink: 0; display: flex; align-items: center;">${completionHtml}</div>` : ''}
                     </div>
-                    ${completionHtml ? `<div class="completion-col" style="flex-shrink: 0; display: flex; align-items: center;">${completionHtml}</div>` : ''}
+                    ${exercisesHtml}
                 </li>`;
         });
 
@@ -1344,6 +1503,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const container = document.querySelector(containerSelector);
         if (!container) return;
         const editBtn = container.querySelector('.btn-icon');
+        if (!editBtn) return;
         
         const isWorkout = containerSelector === '#workout';
         const keys = isWorkout 
@@ -1359,10 +1519,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const parsedMap = parsePlanContent(currentText, keys);
             
             // Build fields for the modal
+            const workoutOptions = ["Chest & Triceps", "Back & Biceps", "Legs", "Shoulders", "Cardio & Core", "Functional Training", "Rest"];
+            
             const fields = keys.map(key => ({
                 label: key,
                 value: parsedMap[key.toLowerCase()] || '',
-                type: 'text'
+                type: isWorkout ? 'select' : 'text',
+                options: isWorkout ? workoutOptions : undefined
             }));
 
             showCustomModal(`Edit ${title}`, fields, async (results) => {

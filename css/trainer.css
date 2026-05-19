@@ -742,11 +742,23 @@ body.trainer-body ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
   .filter-group { flex-wrap: wrap; }
 
   .plans-grid { grid-template-columns: 1fr; }
+  
+  .form-grid-2col {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 @media (max-width: 480px) {
   .stats-grid, .stats-grid-3 { grid-template-columns: 1fr; }
   .stat-value { font-size: 26px; }
+}
+
+/* Form Layouts */
+.form-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 
 /* ============================================================

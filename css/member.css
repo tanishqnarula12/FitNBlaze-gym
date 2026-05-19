@@ -179,6 +179,15 @@ body {
   color: var(--success);
 }
 
+.badge-status.expired {
+  background: rgba(229, 9, 20, 0.1);
+  color: var(--accent-primary);
+}
+
+.mobile-badges-container {
+  display: none;
+}
+
 .menu-toggle {
   display: none;
   background: none;
@@ -666,6 +675,81 @@ body {
   margin-top: auto;
 }
 
+/* Diet Plan Download Items */
+.diet-download-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: var(--bg-hover);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+.diet-download-item:hover {
+  transform: translateX(4px);
+  border-color: #3f3f46;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.diet-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.diet-icon-box {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.diet-icon-box.nv-gain {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.diet-icon-box.nv-loss {
+  background: rgba(248, 113, 113, 0.1);
+  color: #f87171;
+}
+
+.diet-icon-box.v-gain {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+}
+
+.diet-icon-box.v-loss {
+  background: rgba(52, 211, 153, 0.1);
+  color: #34d399;
+}
+
+.diet-name {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.diet-dl-btn {
+  font-size: 20px;
+  color: var(--text-muted);
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.diet-download-item:hover .diet-dl-btn {
+  color: var(--accent-primary);
+  transform: scale(1.1);
+}
+
 /* Responsive Design */
 @media (max-width: 1400px) {
   .hero-summary {
@@ -706,16 +790,27 @@ body {
   }
   
   .top-header {
-    padding: 0 24px;
+    padding: 0 16px;
+  }
+
+  .header-badges {
+    display: none;
+  }
+
+  .mobile-badges-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    width: 100%;
   }
   
   .dashboard-container {
-    padding: 24px;
-    gap: 24px;
+    padding: 20px 16px;
+    gap: 20px;
   }
   
   .welcome-msg {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
