@@ -149,6 +149,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if we are on the login page
     if (!loginForm) return;
 
+    // IF ALREADY LOGGED IN, REDIRECT TO DASHBOARD
+    const currentUser = window.auth.getCurrentUser();
+    if (currentUser) {
+        window.auth.redirectBasedOnRole(currentUser.role);
+        return; // Stop rendering login form
+    }
+
     let currentRole = 'member';
 
     // Role Tab Switching

@@ -10,6 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     }, 1500);
 
+    // 1.5 Dynamic Login/Dashboard Button based on authentication
+    const userSessionData = localStorage.getItem('fnb_user');
+    const navLoginBtn = document.querySelector('a[href="auth/login.html"]');
+    if (userSessionData && navLoginBtn) {
+        try {
+            const user = JSON.parse(userSessionData);
+            if (user && user.role) {
+                navLoginBtn.textContent = 'Dashboard';
+                navLoginBtn.href = `${user.role}/dashboard.html`;
+            }
+        } catch (e) {
+            console.error("Failed to parse user session", e);
+        }
+    }
+
     // 2. Set Current Year in Footer
     const currentYearSpan = document.getElementById('currentYear');
     if (currentYearSpan) {
