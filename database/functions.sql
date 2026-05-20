@@ -44,9 +44,9 @@ CREATE OR REPLACE FUNCTION public.authenticate_user(p_login_id VARCHAR, p_phone 
 RETURNS JSON AS $$
 DECLARE
     found_user RECORD;
-    result JSON;
+    found_member RECORD;
 BEGIN
-    SELECT id, role, login_id, full_name, is_active 
+    SELECT id, role, login_id, full_name, phone, is_active 
     INTO found_user
     FROM public.users
     WHERE login_id = p_login_id AND phone = p_phone;
@@ -56,7 +56,23 @@ BEGIN
     END IF;
     
     IF NOT found_user.is_active THEN
-        RETURN json_build_object('success', false, 'message', 'Account is inactive');
+        IF found_user.role = 'member' THEN
+            RETURN json_build_object('success', false, 'message', 'Your FNB ID has been removed from our system. Please contact the gym reception if you believe this is a mistake.');
+        ELSIF found_user.role = 'trainer' THEN
+            RETURN json_build_object('success', false, 'message', 'Your trainer ID has been removed from our system. Please contact the gym administration.');
+        ELSE
+            RETURN json_build_object('success', false, 'message', 'Account is inactive');
+        END IF;
+    END IF;
+
+    IF found_user.role = 'member' THEN
+        SELECT id INTO found_member
+        FROM public.members
+        WHERE user_id = found_user.id;
+
+        IF NOT FOUND THEN
+            RETURN json_build_object('success', false, 'message', 'Your FNB ID has been removed from our system. Please contact the gym reception if you believe this is a mistake.');
+        END IF;
     END IF;
     
     RETURN json_build_object(
@@ -65,7 +81,8 @@ BEGIN
             'id', found_user.id,
             'role', found_user.role,
             'login_id', found_user.login_id,
-            'full_name', found_user.full_name
+            'full_name', found_user.full_name,
+            'phone', found_user.phone
         )
     );
 END;

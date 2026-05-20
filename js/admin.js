@@ -399,9 +399,9 @@
           else if (currentPage === 'members.html') {
               const { data, error } = await window.db.from('members').select(`
                   id, user_id, custom_id, status, membership_end, current_weight, goal, assigned_trainer_id,
-                  users(full_name, phone),
+                  users!inner(full_name, phone, is_active),
                   plans(name)
-              `).order('membership_start', { ascending: false });
+              `).eq('users.is_active', true).order('membership_start', { ascending: false });
 
               if (!error && data && tbody) {
                   tbody.innerHTML = '';
@@ -558,22 +558,22 @@
       }
   }
 
-    // Global function to delete a member
+    // Global function to delete a member (deactivates account so they see a clear "ID removed" message)
     window.deleteMember = async function(userId, memberName) {
         if (!userId) return alert('Invalid User ID.');
-        if (!confirm(`⚠️ WARNING: Are you sure you want to permanently delete the member "${memberName}"?\n\nThis will completely erase their profile, diet plans, workout routines, and payment logs from the database. This action CANNOT be undone.`)) {
+        if (!confirm(`⚠️ WARNING: Remove member "${memberName}"?\n\nTheir FNB ID will be deactivated immediately. They will no longer be able to log in and will see a message that their ID has been removed.`)) {
             return;
         }
 
         try {
-            const { error } = await window.db.from('users').delete().eq('id', userId);
+            const { error } = await window.db.from('users').update({ is_active: false }).eq('id', userId);
             if (error) throw error;
             
-            alert(`✅ Member "${memberName}" has been successfully deleted.`);
+            alert(`✅ Member "${memberName}" has been removed. Their FNB ID is now deactivated.`);
             location.reload(); // Refresh the table
         } catch (err) {
             console.error('Delete error:', err);
-            alert('Failed to delete member: ' + (err.message || JSON.stringify(err)));
+            alert('Failed to remove member: ' + (err.message || JSON.stringify(err)));
         }
     };
 

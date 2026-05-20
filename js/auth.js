@@ -85,7 +85,8 @@ function getCurrentUser() {
  */
 function logout() {
     localStorage.removeItem('fnb_user');
-    window.location.href = '../auth/login.html'; // Adjust path depending on where it's called
+    const loginUrl = new URL('../auth/login.html', window.location.href).href;
+    window.location.replace(loginUrl);
 }
 
 /**
@@ -106,6 +107,44 @@ function redirectBasedOnRole(role) {
         default:
             console.error("Unknown role:", role);
             alert("Invalid role assigned to this account.");
+    }
+}
+
+/**
+ * Verifies a member account still exists and is active in the database.
+ * @param {string} userId
+ * @returns {Promise<{ok: boolean, reason?: string}>}
+ */
+async function verifyMemberAccount(userId) {
+    if (!window.db || !userId) {
+        return { ok: false, reason: 'removed' };
+    }
+
+    try {
+        const { data: userData, error: userErr } = await window.db
+            .from('users')
+            .select('id, is_active')
+            .eq('id', userId)
+            .maybeSingle();
+
+        if (userErr || !userData || !userData.is_active) {
+            return { ok: false, reason: 'removed' };
+        }
+
+        const { data: memberRow, error: memErr } = await window.db
+            .from('members')
+            .select('id')
+            .eq('user_id', userId)
+            .maybeSingle();
+
+        if (memErr || !memberRow) {
+            return { ok: false, reason: 'removed' };
+        }
+
+        return { ok: true };
+    } catch (err) {
+        console.error('Member account verification failed:', err);
+        return { ok: false, reason: 'removed' };
     }
 }
 
@@ -136,11 +175,12 @@ window.auth = {
     getCurrentUser,
     logout,
     redirectBasedOnRole,
-    requireAuth
+    requireAuth,
+    verifyMemberAccount
 };
 
 // --- UI Interaction Logic for login.html ---
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const loginForm = document.getElementById('loginForm');
     const roleTabs = document.querySelectorAll('.role-tab');
     const errorMessage = document.getElementById('errorMessage');
@@ -149,9 +189,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if we are on the login page
     if (!loginForm) return;
 
-    // IF ALREADY LOGGED IN, REDIRECT TO DASHBOARD
+    // IF ALREADY LOGGED IN, REDIRECT TO DASHBOARD (after verifying member still exists)
     const currentUser = window.auth.getCurrentUser();
     if (currentUser) {
+        if (currentUser.role === 'member' && window.db) {
+            const verification = await window.auth.verifyMemberAccount(currentUser.id);
+            if (!verification.ok) {
+                localStorage.removeItem('fnb_user');
+                showError('Your FNB ID has been removed from our system. Please contact the gym reception if you believe this is a mistake.');
+                return;
+            }
+        }
         window.auth.redirectBasedOnRole(currentUser.role);
         return; // Stop rendering login form
     }

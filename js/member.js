@@ -1,6 +1,14 @@
 // js/member.js
 document.addEventListener('DOMContentLoaded', async () => {
-    
+
+    document.getElementById('logoutLink')?.addEventListener('click', e => {
+        e.preventDefault();
+        if (confirm('Are you sure you want to logout?')) {
+            if (window.auth) window.auth.logout();
+            else window.location.replace('../auth/login.html');
+        }
+    });
+
     // --- Supabase Auth Check ---
     if(window.auth && window.auth.requireAuth) {
         window.auth.requireAuth('member');
@@ -12,6 +20,91 @@ document.addEventListener('DOMContentLoaded', async () => {
     const isDashboard = window.location.pathname.includes('dashboard.html');
     const isProfile = window.location.pathname.includes('profile.html');
     const isMembership = window.location.pathname.includes('membership.html');
+
+    function checkMembershipExpired(memberData, expiryDate) {
+        if (!memberData) return true;
+        if (memberData.status === 'expired' || memberData.status === 'suspended') return true;
+        if (memberData.status !== 'active') return true;
+        if (!expiryDate) return true;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const exp = new Date(expiryDate);
+        exp.setHours(0, 0, 0, 0);
+        return exp < today;
+    }
+
+    function showAccountRemovedOverlay() {
+        if (document.getElementById('accountRemovedOverlay')) return;
+
+        const overlay = document.createElement('div');
+        overlay.id = 'accountRemovedOverlay';
+        overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);z-index:10001;display:flex;align-items:center;justify-content:center;padding:20px;';
+        overlay.innerHTML = `
+            <div style="background:#111;border:1px solid rgba(230,57,70,0.35);border-radius:16px;padding:32px;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 48px rgba(0,0,0,0.6);">
+                <div style="width:64px;height:64px;border-radius:50%;background:rgba(230,57,70,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                    <i class="fa-solid fa-user-slash" style="font-size:28px;color:var(--accent-primary,#e63946);"></i>
+                </div>
+                <h2 style="color:#fff;margin:0 0 12px;font-size:22px;">FNB ID Removed</h2>
+                <p style="color:#aaa;margin:0 0 24px;line-height:1.6;font-size:14px;">
+                    Your FNB ID has been removed from our system. You no longer have access to the member dashboard.
+                    Please contact Fit 'N' Blaze reception if you believe this is a mistake.
+                </p>
+                <button id="removedGoLoginBtn" class="btn-primary" style="width:100%;padding:12px;cursor:pointer;">
+                    Return to Login
+                </button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        document.getElementById('removedGoLoginBtn')?.addEventListener('click', () => {
+            if (window.auth) window.auth.logout();
+            else window.location.replace('../auth/login.html');
+        });
+    }
+
+    function showMembershipExpiredLock(planName, expiryDate) {
+        if (document.getElementById('membershipLockOverlay')) return;
+
+        const main = document.querySelector('.main-content');
+        if (!main) return;
+
+        const formattedExpiry = expiryDate
+            ? new Date(expiryDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })
+            : 'N/A';
+
+        const overlay = document.createElement('div');
+        overlay.id = 'membershipLockOverlay';
+        overlay.style.cssText = 'position:absolute;inset:0;background:rgba(8,8,10,0.94);backdrop-filter:blur(6px);z-index:500;display:flex;align-items:center;justify-content:center;padding:24px;';
+        overlay.innerHTML = `
+            <div style="background:#141414;border:1px solid rgba(230,57,70,0.35);border-radius:16px;padding:32px;max-width:440px;width:100%;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.5);">
+                <div style="width:72px;height:72px;border-radius:50%;background:rgba(230,57,70,0.12);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+                    <i class="fa-solid fa-lock" style="font-size:30px;color:var(--accent-primary,#e63946);"></i>
+                </div>
+                <h2 style="color:#fff;margin:0 0 10px;font-size:22px;">Membership Expired</h2>
+                <p style="color:#aaa;margin:0 0 8px;line-height:1.6;font-size:14px;">
+                    Your <strong style="color:#fff;">${planName || 'membership'}</strong> plan expired on <strong style="color:#fff;">${formattedExpiry}</strong>.
+                </p>
+                <p style="color:#888;margin:0 0 24px;font-size:13px;line-height:1.5;">
+                    Your dashboard is locked until you renew. Use the Membership page in the sidebar to renew your plan.
+                </p>
+                <a href="membership.html" class="btn-primary" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;text-decoration:none;box-sizing:border-box;">
+                    <i class="fa-solid fa-id-card"></i> Renew Membership
+                </a>
+            </div>
+        `;
+
+        if (getComputedStyle(main).position === 'static') {
+            main.style.position = 'relative';
+        }
+        main.appendChild(overlay);
+
+        document.querySelectorAll('.sidebar-nav .nav-item').forEach(link => {
+            const href = link.getAttribute('href') || '';
+            if (!href.includes('membership.html') && !href.includes('logout')) {
+                link.style.opacity = '0.45';
+                link.style.pointerEvents = 'none';
+            }
+        });
+    }
 
     // Default Plans Templates
     const defaultDietTemplates = {
@@ -134,17 +227,34 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- Dynamic Data Fetching ---
     async function loadMemberData() {
+        if (window.auth?.verifyMemberAccount) {
+            const verification = await window.auth.verifyMemberAccount(currentUser.id);
+            if (!verification.ok) {
+                showAccountRemovedOverlay();
+                return;
+            }
+        }
+
         try {
             // Fetch User + Member + Plan + Trainer
             const { data: memberData, error: memErr } = await window.db.from('members').select(`
                 *,
-                users (full_name, email, phone, created_at),
+                users (full_name, email, phone, created_at, is_active),
                 plans (name, duration_days),
                 trainers (certifications, users (full_name))
             `).eq('user_id', currentUser.id).single();
 
-            if (memErr) throw memErr;
-            if (!memberData) return;
+            if (memErr) {
+                if (memErr.code === 'PGRST116' || memErr.message?.includes('0 rows')) {
+                    showAccountRemovedOverlay();
+                    return;
+                }
+                throw memErr;
+            }
+            if (!memberData || !memberData.users?.is_active) {
+                showAccountRemovedOverlay();
+                return;
+            }
 
             // Auto-fix missing plan or expiry date, or incorrect 30-day fallback for longer plans (graceful fallback)
             let planName = memberData.plans?.name;
@@ -483,7 +593,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 if (timeStr.includes("06:00 AM") || timeStr.includes("07:00 AM")) label += " - Morning Slot";
                                 else if (timeStr.includes("08:00 AM") || timeStr.includes("09:00 AM") || timeStr.includes("10:00 AM")) label += " - Morning Slot";
                                 else if (timeStr.includes("05:00 PM") || timeStr.includes("06:00 PM") || timeStr.includes("07:00 PM")) label += " - Evening Slot";
-                                else if (timeStr.includes("08:00 PM") || timeStr.includes("09:00 PM")) label += " - Late Slot";
+                                else if (timeStr.includes("08:00 PM") || timeStr.includes("09:00 PM") || timeStr.includes("10:00 PM") || timeStr.includes("11:00 PM")) label += " - Late Slot";
                                 return { label: label, value: timeStr };
                             });
 
@@ -915,8 +1025,33 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             }
 
+            const membershipExpired = checkMembershipExpired(memberData, expiryDate);
+            if (membershipExpired && memberData.status === 'active') {
+                window.db.from('members').update({ status: 'expired' }).eq('id', memberData.id).then();
+            }
+            if ((isDashboard || isProfile) && membershipExpired) {
+                showMembershipExpiredLock(planName, expiryDate);
+            }
+            if (isMembership && membershipExpired) {
+                const container = document.querySelector('.dashboard-container');
+                if (container && !document.getElementById('expiredRenewBanner')) {
+                    const banner = document.createElement('div');
+                    banner.id = 'expiredRenewBanner';
+                    banner.style.cssText = 'margin-bottom:20px;padding:16px 20px;border-radius:12px;background:rgba(230,57,70,0.12);border:1px solid rgba(230,57,70,0.35);color:#fff;';
+                    banner.innerHTML = `
+                        <strong style="display:block;margin-bottom:6px;"><i class="fa-solid fa-triangle-exclamation" style="color:var(--accent-primary);margin-right:8px;"></i>Your membership has expired</strong>
+                        <span style="color:#ccc;font-size:14px;">Renew any plan below to unlock your dashboard again.</span>
+                    `;
+                    container.prepend(banner);
+                }
+            }
+
         } catch (err) {
             console.error("Dashboard init error:", err);
+            if (window.auth?.verifyMemberAccount) {
+                const verification = await window.auth.verifyMemberAccount(currentUser.id);
+                if (!verification.ok) showAccountRemovedOverlay();
+            }
         }
     }
 
