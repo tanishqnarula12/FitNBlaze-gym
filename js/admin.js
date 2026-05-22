@@ -58,11 +58,19 @@
 
   /* ---- Animated counter for stats cards ---- */
   function animateCount(el, target, prefix = '', suffix = '') {
+    // Clear any existing animation on this element
+    if (el._countInterval) clearInterval(el._countInterval);
+
     let start = 0;
-    const step = Math.ceil(target / 60);
-    const timer = setInterval(() => {
-      start += step;
-      if (start >= target) { start = target; clearInterval(timer); }
+    const step = Math.ceil(target / 60) || 1; // ensure at least 1 step if target > 0
+    el._countInterval = setInterval(() => {
+      if (start >= target) { 
+          start = target; 
+          clearInterval(el._countInterval); 
+      } else {
+          start += step;
+          if (start > target) start = target; // prevent overshooting
+      }
       el.textContent = prefix + start.toLocaleString('en-IN') + suffix;
     }, 18);
   }
@@ -241,7 +249,7 @@
 
               const { data: payments, error: paymentsErr } = await window.db
                   .from('payments')
-                  .select('amount, paid_at, plan_id, plans(name)')
+                  .select('amount, paid_at, created_at, plan_id, plans(name)')
                   .eq('status', 'paid');
 
               if (!paymentsErr && payments) {
@@ -267,7 +275,9 @@
 
                   payments.forEach(p => {
                       const amount = Number(p.amount) || 0;
-                      const paidDate = p.paid_at ? new Date(p.paid_at) : null;
+                      // Fallback to created_at if paid_at is null
+                      const dateString = p.paid_at || p.created_at;
+                      const paidDate = dateString ? new Date(dateString) : null;
 
                       // Calculate dynamic monthly revenue (current calendar month & year)
                       if (paidDate && paidDate.getMonth() === currentMonth && paidDate.getFullYear() === currentYear) {
