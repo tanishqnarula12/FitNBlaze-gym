@@ -243,15 +243,29 @@
               }
 
               // 3. Fetch Plans and Payments to calculate Plan Revenue, Monthly Revenue, and Yearly Revenue dynamically
+              // ONLY count payments from active members (users.is_active = true)
               const { data: allPlans, error: plansErr } = await window.db
                   .from('plans')
                   .select('id, name')
                   .eq('is_active', true);
 
-              const { data: payments, error: paymentsErr } = await window.db
-                  .from('payments')
-                  .select('amount, paid_at, created_at, plan_id, plans(name)')
-                  .eq('status', 'paid');
+              // Collect active member IDs from the members data we already fetched above
+              const activeMemberIds = (members || []).map(m => m.id);
+
+              // Fetch payments – if there are active members, filter to only their payments
+              // If no active members, set payments to empty array (no revenue to show)
+              let payments = [];
+              let paymentsErr = null;
+
+              if (activeMemberIds.length > 0) {
+                  const result = await window.db
+                      .from('payments')
+                      .select('amount, paid_at, created_at, plan_id, plans(name)')
+                      .eq('status', 'paid')
+                      .in('member_id', activeMemberIds);
+                  payments = result.data;
+                  paymentsErr = result.error;
+              }
 
               if (!paymentsErr && payments) {
                   const today = new Date();
