@@ -750,6 +750,238 @@ body {
   transform: scale(1.1);
 }
 
+/* ========== Exercise Demos Section ========== */
+
+/* Filter pills - horizontal scrollable on mobile */
+.exdemo-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+.exdemo-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.exdemo-filter-btn {
+  padding: 7px 18px;
+  border-radius: 100px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.exdemo-filter-btn:hover {
+  border-color: #52525b;
+  color: var(--text-main);
+  background: var(--bg-hover);
+}
+
+.exdemo-filter-btn.active {
+  background: var(--text-main);
+  color: var(--bg-dark);
+  border-color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Video grid - mobile-first */
+.exdemo-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Individual video card */
+.exdemo-card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg-hover);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.exdemo-card:hover {
+  border-color: #3f3f46;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.exdemo-card.hidden {
+  display: none;
+}
+
+/* Video wrapper */
+.exdemo-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+}
+
+.exdemo-video-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.exdemo-card:hover .exdemo-video-wrap video {
+  transform: scale(1.03);
+}
+
+/* Play/Pause overlay */
+.exdemo-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.35);
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.exdemo-overlay.playing {
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.exdemo-video-wrap:hover .exdemo-overlay.playing {
+  opacity: 1;
+  pointer-events: auto;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.exdemo-play-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.exdemo-play-btn:hover {
+  background: rgba(230, 57, 70, 0.85);
+  border-color: rgba(230, 57, 70, 0.6);
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(230, 57, 70, 0.35);
+}
+
+.exdemo-play-btn:active {
+  transform: scale(0.95);
+}
+
+/* Mute/Unmute button - bottom-right corner */
+.exdemo-mute-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.25s ease;
+  z-index: 3;
+  opacity: 0;
+}
+
+.exdemo-video-wrap:hover .exdemo-mute-btn,
+.exdemo-mute-btn.visible {
+  opacity: 1;
+}
+
+.exdemo-mute-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.exdemo-mute-btn:active {
+  transform: scale(0.92);
+}
+
+/* Info bar below video */
+.exdemo-info {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.exdemo-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.exdemo-tag {
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent-primary);
+  background: rgba(230, 57, 70, 0.1);
+  border: 1px solid rgba(230, 57, 70, 0.15);
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive: 2 columns on tablet */
+@media (min-width: 520px) {
+  .exdemo-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Responsive: 3 columns on desktop */
+@media (min-width: 1024px) {
+  .exdemo-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 1400px) {
   .hero-summary {
@@ -983,3 +1215,207 @@ body {
   color: #666;
   margin-top: 6px;
 }
+
+/* Exercise Demo Nav Button (Dashboard) */
+.exdemo-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: rgba(230, 57, 70, 0.08);
+  border: 1px solid rgba(230, 57, 70, 0.2);
+  color: var(--accent-primary);
+  font-family: var(--font-main);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.exdemo-nav-btn:hover {
+  background: rgba(230, 57, 70, 0.15);
+  border-color: rgba(230, 57, 70, 0.4);
+  transform: translateX(4px);
+  color: var(--accent-hover);
+}
+
+.exdemo-nav-btn i {
+  font-size: 15px;
+}
+
+/* Fullscreen Video Modal (Exercises Page) */
+.exdemo-fullscreen-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.exdemo-fullscreen-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.exdemo-fs-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 10000;
+}
+
+.exdemo-fs-close:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  transform: rotate(90deg) scale(1.05);
+}
+
+.exdemo-fs-video-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: scale(0.92);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.exdemo-fullscreen-overlay.active .exdemo-fs-video-container {
+  transform: scale(1);
+}
+
+.exdemo-fs-video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: transparent;
+  display: block;
+}
+
+/* Fullscreen controls bar */
+.exdemo-fs-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.exdemo-fs-video-container:hover .exdemo-fs-controls {
+  opacity: 1;
+}
+
+.exdemo-fs-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.exdemo-fs-btn:hover {
+  background: rgba(230, 57, 70, 0.7);
+  border-color: rgba(230, 57, 70, 0.5);
+  transform: scale(1.1);
+}
+
+.exdemo-fs-btn:active {
+  transform: scale(0.95);
+}
+
+.exdemo-fs-title {
+  flex: 1;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Exercises page content wrapper */
+.exdemo-page-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.exdemo-back-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.exdemo-back-btn:hover {
+  background: var(--bg-hover);
+  border-color: #52525b;
+  color: var(--text-main);
+}
+
+.exdemo-page-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.exdemo-page-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+

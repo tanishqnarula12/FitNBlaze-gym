@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Demos | Fit 'N' Blaze</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/member.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="dashboard.html" class="sidebar-logo">
+                <img src="../assets/FNB logo.png" alt="FIT 'N' BLAZE Logo" class="sidebar-logo-img"> FIT<span>'N'</span>BLAZE
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item">
+                <i class="fa-solid fa-border-all"></i> Dashboard
+            </a>
+            <a href="membership.html" class="nav-item">
+                <i class="fa-solid fa-id-card"></i> Membership
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fa-solid fa-user"></i> Profile
+            </a>
+            <a href="exercises.html" class="nav-item active">
+                <i class="fa-solid fa-fire-flame-curved"></i> Exercises
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" id="logoutLink" class="nav-item">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <h1 class="welcome-msg">Exercise Demos</h1>
+            </div>
+            <div class="header-right" style="display: flex; align-items: center; gap: 20px;">
+                <a href="profile.html" style="text-decoration: none;">
+                    <div class="profile-avatar">--</div>
+                </a>
+            </div>
+        </header>
+
+        <!-- Exercises Container -->
+        <div class="dashboard-container">
+
+            <!-- Page Header with Back Button -->
+            <div class="exdemo-page-header">
+                <a href="dashboard.html" class="exdemo-back-btn" title="Back to Dashboard">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <div>
+                    <div class="exdemo-page-title">Exercise Demonstrations</div>
+                    <div class="exdemo-page-subtitle">Watch proper form & technique. Tap to play, click to go fullscreen.</div>
+                </div>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="exdemo-filters" id="exdemoFilters">
+                <button class="exdemo-filter-btn active" data-filter="all">All</button>
+                <button class="exdemo-filter-btn" data-filter="chest">Chest</button>
+                <button class="exdemo-filter-btn" data-filter="back">Back</button>
+                <button class="exdemo-filter-btn" data-filter="shoulders">Shoulders</button>
+                <button class="exdemo-filter-btn" data-filter="arms">Arms</button>
+                <button class="exdemo-filter-btn" data-filter="legs">Legs</button>
+            </div>
+
+            <!-- Video Grid -->
+            <div class="exdemo-grid" id="exdemoGrid">
+
+                <!-- CHEST -->
+                <div class="exdemo-card" data-category="chest" data-name="Flat Bench Press">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/flat%20bench%20press.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Flat Bench Press</span><span class="exdemo-tag">Chest</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="chest" data-name="Incline Bench Press">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/incline%20bench%20press.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Incline Bench Press</span><span class="exdemo-tag">Chest</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="chest" data-name="Cable Crossover">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/cable%20crossover.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Cable Crossover</span><span class="exdemo-tag">Chest</span></div>
+                </div>
+
+                <!-- BACK -->
+                <div class="exdemo-card" data-category="back" data-name="Lat Pulldown">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/Lat%20Pulldown.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Lat Pulldown</span><span class="exdemo-tag">Back</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="back" data-name="Seated Cable Row">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/seated%20cable%20row.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Seated Cable Row</span><span class="exdemo-tag">Back</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="back" data-name="Deadlift">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/deadlift.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Deadlift</span><span class="exdemo-tag">Back</span></div>
+                </div>
+
+                <!-- SHOULDERS -->
+                <div class="exdemo-card" data-category="shoulders" data-name="Machine Shoulder Press">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/machine%20shoulder%20press.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Machine Shoulder Press</span><span class="exdemo-tag">Shoulders</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="shoulders" data-name="Dumbbell Side Raises">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/dumble%20side%20raises.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Dumbbell Side Raises</span><span class="exdemo-tag">Shoulders</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="shoulders" data-name="Rear Delt Fly">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/rear%20delt%20fly.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Rear Delt Fly</span><span class="exdemo-tag">Shoulders</span></div>
+                </div>
+
+                <!-- ARMS -->
+                <div class="exdemo-card" data-category="arms" data-name="Preacher Curl">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/preacher%20curl.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Preacher Curl</span><span class="exdemo-tag">Biceps</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="arms" data-name="Rope Pushdown">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/rope%20pushdown.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Rope Pushdown</span><span class="exdemo-tag">Triceps</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="arms" data-name="Skull Crusher">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/skull%20crusher.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Skull Crusher</span><span class="exdemo-tag">Triceps</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="arms" data-name="Overhead Dumbbell Extension">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/over%20head%20dumbbell%20extension.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Overhead DB Extension</span><span class="exdemo-tag">Triceps</span></div>
+                </div>
+
+                <!-- LEGS -->
+                <div class="exdemo-card" data-category="legs" data-name="Leg Press">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/leg%20press.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Leg Press</span><span class="exdemo-tag">Legs</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="legs" data-name="Leg Extension">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/leg%20extension.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Leg Extension</span><span class="exdemo-tag">Legs</span></div>
+                </div>
+
+                <div class="exdemo-card" data-category="legs" data-name="Calf Raises">
+                    <div class="exdemo-video-wrap">
+                        <video src="../assets/excercises/calf%20raises.mp4" loop playsinline preload="metadata" muted></video>
+                        <div class="exdemo-overlay">
+                            <button class="exdemo-play-btn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                        </div>
+                        <button class="exdemo-mute-btn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                        <button class="exdemo-expand-btn" aria-label="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+                    </div>
+                    <div class="exdemo-info"><span class="exdemo-name">Calf Raises</span><span class="exdemo-tag">Legs</span></div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Fullscreen Video Modal -->
+    <div class="exdemo-fullscreen-overlay" id="fsOverlay">
+        <button class="exdemo-fs-close" id="fsClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        <div class="exdemo-fs-video-container">
+            <video id="fsVideo" loop playsinline></video>
+            <div class="exdemo-fs-controls">
+                <button class="exdemo-fs-btn" id="fsPlayBtn" aria-label="Play"><i class="fa-solid fa-play"></i></button>
+                <button class="exdemo-fs-btn" id="fsMuteBtn" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+                <span class="exdemo-fs-title" id="fsTitle"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inline style overrides for this page -->
+    <style>
+        /* Play button is always visible as a "tap to watch" trigger */
+        .exdemo-overlay {
+            background: rgba(0, 0, 0, 0.35);
+            cursor: pointer;
+        }
+        /* Remove mute & expand buttons from grid (only in fullscreen) */
+        .exdemo-mute-btn,
+        .exdemo-expand-btn {
+            display: none !important;
+        }
+        /* Card info bar clickable */
+        .exdemo-info {
+            cursor: pointer;
+        }
+        /* Fullscreen controls always visible on touch */
+        @media (hover: none) {
+            .exdemo-fs-controls {
+                opacity: 1 !important;
+            }
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Auth check
+        if (window.auth && window.auth.requireAuth) {
+            window.auth.requireAuth('member');
+        }
+
+        // Logout
+        document.getElementById('logoutLink')?.addEventListener('click', e => {
+            e.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+                if (window.auth) window.auth.logout();
+                else window.location.replace('../auth/login.html');
+            }
+        });
+
+        // Mobile sidebar toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', () => sidebar.classList.toggle('active'));
+        }
+
+        // Load user avatar
+        const currentUser = window.auth ? window.auth.getCurrentUser() : null;
+        if (currentUser) {
+            const userData = JSON.parse(localStorage.getItem('fnb_user') || '{}');
+            if (userData.name) {
+                document.querySelectorAll('.profile-avatar').forEach(el => {
+                    el.textContent = userData.name.substring(0, 2).toUpperCase();
+                });
+            }
+        }
+
+        // ==========================================
+        // Video Grid — Tap to open Fullscreen
+        // ==========================================
+        const exdemoGrid = document.getElementById('exdemoGrid');
+        const exdemoFilters = document.getElementById('exdemoFilters');
+        const allCards = exdemoGrid.querySelectorAll('.exdemo-card');
+
+        // Every card click → opens fullscreen
+        allCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const video = card.querySelector('video');
+                if (video) {
+                    openFullscreen(video.src, card.dataset.name || 'Exercise');
+                }
+            });
+        });
+
+        // --- Category Filter ---
+        if (exdemoFilters) {
+            const filterBtns = exdemoFilters.querySelectorAll('.exdemo-filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const filter = btn.dataset.filter;
+                    allCards.forEach(card => {
+                        card.classList.toggle('hidden', filter !== 'all' && card.dataset.category !== filter);
+                    });
+                });
+            });
+        }
+
+        // ==========================================
+        // Fullscreen Video Modal
+        // ==========================================
+        const fsOverlay = document.getElementById('fsOverlay');
+        const fsVideo = document.getElementById('fsVideo');
+        const fsClose = document.getElementById('fsClose');
+        const fsPlayBtn = document.getElementById('fsPlayBtn');
+        const fsMuteBtn = document.getElementById('fsMuteBtn');
+        const fsTitle = document.getElementById('fsTitle');
+
+        function openFullscreen(src, name) {
+            fsVideo.src = src;
+            fsVideo.muted = true;
+            fsVideo.loop = true;
+            fsTitle.textContent = name;
+            fsPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            fsMuteBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+            fsOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Auto-play after modal animates in
+            setTimeout(() => {
+                fsVideo.play().then(() => {
+                    fsPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+                }).catch(() => {
+                    // Autoplay blocked — user will tap play
+                    fsPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+                });
+            }, 350);
+        }
+
+        function closeFullscreen() {
+            fsVideo.pause();
+            fsVideo.removeAttribute('src');
+            fsVideo.load(); // Clear the video buffer
+            fsOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close button
+        fsClose.addEventListener('click', e => {
+            e.stopPropagation();
+            closeFullscreen();
+        });
+
+        // Click outside video container to close
+        fsOverlay.addEventListener('click', e => {
+            if (e.target === fsOverlay) closeFullscreen();
+        });
+
+        // Play/Pause in fullscreen
+        fsPlayBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            if (fsVideo.paused) {
+                fsVideo.play();
+                fsPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            } else {
+                fsVideo.pause();
+                fsPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            }
+        });
+
+        // Tap video itself to toggle play/pause
+        fsVideo.addEventListener('click', e => {
+            e.stopPropagation();
+            if (fsVideo.paused) {
+                fsVideo.play();
+                fsPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            } else {
+                fsVideo.pause();
+                fsPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            }
+        });
+
+        // Mute/Unmute in fullscreen
+        fsMuteBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            fsVideo.muted = !fsVideo.muted;
+            fsMuteBtn.innerHTML = fsVideo.muted
+                ? '<i class="fa-solid fa-volume-xmark"></i>'
+                : '<i class="fa-solid fa-volume-high"></i>';
+        });
+
+        // Escape to close
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && fsOverlay.classList.contains('active')) {
+                closeFullscreen();
+            }
+        });
+
+    });
+    </script>
+
+</body>
+</html>

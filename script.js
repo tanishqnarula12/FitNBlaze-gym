@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Razorpay Configuration
             const options = {
-                "key": "rzp_test_SeEg9HEO5nnatC", // Test Key from User
+                "key": "rzp_live_SsPPJh5gmmyL2r", // Live Key
                 "amount": currentSelectedPrice * 100, // Amount in paise
                 "currency": "INR",
                 "name": "FIT 'N' BLAZE",

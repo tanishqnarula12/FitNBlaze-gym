@@ -36,14 +36,13 @@ Now we need to tell your code to use the real payment gateway.
 4. It will currently look like this:
    ```javascript
    const options = {
-       "key": "rzp_test_SeEg9HEO5nnatC", // Test Key
+       "key": "YOUR_RAZORPAY_LIVE_KEY_ID_HERE", // Live Key
        "amount": Math.round(plan.price * 100),
    ```
-5. Replace that test key with your new **Live Key Id**:
-   ```javascript
-   const options = {
-       "key": "rzp_live_YourActualLiveKeyHere", // Live Key
-       "amount": Math.round(plan.price * 100),
+5. Note: Make sure to place your Live Key Secret in your `.env` file and keep it secure:
+   ```
+   RZP_LIVE_KEY=YOUR_RAZORPAY_LIVE_KEY_ID_HERE
+   RZP_LIVE_SECRET=YOUR_RAZORPAY_LIVE_KEY_SECRET_HERE
    ```
 6. Save the `member.js` file.
 

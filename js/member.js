@@ -846,42 +846,70 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Populate Profile
             if (isProfile) {
                 const memVals = document.querySelectorAll('.mem-row .mem-val');
+                let parsedNotes = {};
+                try {
+                    if (memberData.medical_notes && memberData.medical_notes.startsWith('{')) {
+                        parsedNotes = JSON.parse(memberData.medical_notes);
+                    }
+                } catch(e) {}
+
                 if (memVals.length >= 8) { // Assuming 5 personal + 3 emergency
                     memVals[0].textContent = name;
                     memVals[1].textContent = memberData.users.email || 'N/A';
                     memVals[2].textContent = memberData.users.phone;
-                    memVals[3].textContent = new Date(memberData.users.created_at).toLocaleDateString('en-IN');
-                    memVals[4].textContent = 'Not Specified'; // Gender not in schema yet
+                    memVals[3].textContent = parsedNotes.dob || new Date(memberData.users.created_at).toLocaleDateString('en-IN');
+                    memVals[4].textContent = parsedNotes.gender || 'Not Specified';
                     
-                    // Parse emergency contact from medical_notes if JSON
-                    let emergency = { name: '', relation: '', phone: '' };
-                    try {
-                        if (memberData.medical_notes && memberData.medical_notes.startsWith('{')) {
-                            emergency = JSON.parse(memberData.medical_notes);
-                        }
-                    } catch(e) {}
+                    memVals[5].textContent = parsedNotes.name || '---';
+                    memVals[6].textContent = parsedNotes.relation || '---';
+                    memVals[7].textContent = parsedNotes.phone || '---';
+                }
 
-                    memVals[5].textContent = emergency.name || '---';
-                    memVals[6].textContent = emergency.relation || '---';
-                    memVals[7].textContent = emergency.phone || '---';
+                // Edit Personal Details
+                const editPersonalBtn = document.getElementById('editPersonalBtn');
+                if (editPersonalBtn) {
+                    editPersonalBtn.addEventListener('click', () => {
+                        showCustomModal("Edit Personal Details", [
+                            { label: "Full Name", value: name },
+                            { label: "Date of Birth (YYYY-MM-DD)", type: "date", value: parsedNotes.dob || '' },
+                            { label: "Gender", type: "select", options: ["Male", "Female", "Other", "Prefer not to say"], value: parsedNotes.gender || '' }
+                        ], async (results) => {
+                            if (!results[0]) {
+                                alert("Name cannot be empty.");
+                                return;
+                            }
+                            editPersonalBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+                            
+                            // Update name in users table if changed
+                            if (results[0] !== name) {
+                                await window.db.from('users').update({ full_name: results[0] }).eq('id', currentUser.id);
+                            }
+                            
+                            // Update dob and gender in members table (medical_notes)
+                            parsedNotes.dob = results[1];
+                            parsedNotes.gender = results[2];
+                            await window.db.from('members').update({ medical_notes: JSON.stringify(parsedNotes) }).eq('id', memberData.id);
+                            
+                            location.reload();
+                        });
+                    });
                 }
 
                 // Edit Emergency Contact with Premium Modal
                 const editContactBtn = document.querySelector('.fa-truck-medical').closest('.card').querySelector('.btn-icon');
                 if (editContactBtn) {
                     editContactBtn.addEventListener('click', () => {
-                        let currentData = { name: '', relation: '', phone: '' };
-                        try { if (memberData.medical_notes) currentData = JSON.parse(memberData.medical_notes); } catch(e){}
-                        
                         showCustomModal("Edit Emergency Contact", [
-                            { label: "Contact Name", value: currentData.name },
-                            { label: "Relationship", value: currentData.relation },
-                            { label: "Phone Number", value: currentData.phone }
+                            { label: "Contact Name", value: parsedNotes.name || '' },
+                            { label: "Relationship", value: parsedNotes.relation || '' },
+                            { label: "Phone Number", value: parsedNotes.phone || '' }
                         ], async (results) => {
                             if (!results[0]) return;
-                            const emergencyJson = JSON.stringify({ name: results[0], relation: results[1], phone: results[2] });
+                            parsedNotes.name = results[0];
+                            parsedNotes.relation = results[1];
+                            parsedNotes.phone = results[2];
                             editContactBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-                            await window.db.from('members').update({ medical_notes: emergencyJson }).eq('id', memberData.id);
+                            await window.db.from('members').update({ medical_notes: JSON.stringify(parsedNotes) }).eq('id', memberData.id);
                             location.reload();
                         });
                     });
@@ -1060,7 +1088,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (window.Razorpay) {
             try {
                 const options = {
-                    "key": "rzp_test_SeEg9HEO5nnatC", // Test Key
+                    "key": "rzp_live_SsPPJh5gmmyL2r", // Live Key
                     "amount": Math.round(plan.price * 100),
                     "currency": "INR",
                     "name": "Fit 'N' Blaze",
@@ -1811,4 +1839,5 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (!notifToggle.contains(e.target) && !notifDropdown.contains(e.target)) notifDropdown.classList.remove('show');
         });
     }
+
 });
