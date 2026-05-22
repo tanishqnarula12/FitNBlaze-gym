@@ -17,9 +17,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const currentUser = window.auth ? window.auth.getCurrentUser() : null;
     if (!currentUser || !window.db) return;
 
-    const isDashboard = window.location.pathname.includes('dashboard.html');
-    const isProfile = window.location.pathname.includes('profile.html');
-    const isMembership = window.location.pathname.includes('membership.html');
+    const isDashboard = window.location.pathname.includes('dashboard');
+    const isProfile = window.location.pathname.includes('profile');
+    const isMembership = window.location.pathname.includes('membership');
 
     function checkMembershipExpired(memberData, expiryDate) {
         if (!memberData) return true;
@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         document.querySelectorAll('.sidebar-nav .nav-item').forEach(link => {
             const href = link.getAttribute('href') || '';
-            if (!href.includes('membership.html') && !href.includes('logout')) {
+            if (!href.includes('membership') && !href.includes('logout')) {
                 link.style.opacity = '0.45';
                 link.style.pointerEvents = 'none';
             }
@@ -977,6 +977,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                         "PT One-on-One": ["Dedicated Personal Coach", "Custom Nutrition Strategy", "Progress Tracking"]
                     };
 
+                    const isMembershipActive = memberData.status === 'active' && expiryDate && new Date(expiryDate) >= new Date().setHours(0,0,0,0);
+
                     dbPlans.forEach(plan => {
                         const isCurrent = memberData.plan_id === plan.id;
                         const features = planFeatures[plan.name] || ["Full Access", "Trainer support", "Custom routine"];
@@ -1014,7 +1016,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                         let buttonHtml = '';
                         if (isCurrent) {
-                            buttonHtml = `<button class="btn-primary" disabled style="background: var(--success); opacity: 0.8; cursor: default;">Current Plan</button>`;
+                            if (isMembershipActive) {
+                                buttonHtml = `<button class="btn-primary" disabled style="background: var(--success); opacity: 0.8; cursor: default;">Current Plan (Active)</button>`;
+                            } else {
+                                buttonHtml = `<button class="btn-primary" id="btn-pay-${plan.id}">Renew Current Plan</button>`;
+                            }
                         } else {
                             buttonHtml = `<button class="btn-primary" id="btn-pay-${plan.id}">${buttonText}</button>`;
                         }
@@ -1037,8 +1043,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                             if (ptBoxingGrid) ptBoxingGrid.appendChild(cardElement);
                         }
 
-                        // Add Payment click listener if not current
-                        if (!isCurrent) {
+                        // Add Payment click listener if not current, or if current but expired (so they can renew)
+                        if (!isCurrent || !isMembershipActive) {
                             setTimeout(() => {
                                 const payBtn = document.getElementById(`btn-pay-${plan.id}`);
                                 if (payBtn) {
