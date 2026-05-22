@@ -116,16 +116,33 @@
       try {
           // --- DASHBOARD OVERVIEW ---
           if (currentPage === 'dashboard.html') {
-              // 1. Fetch main stats
-              const { data: statsData, error: statsError } = await window.db.rpc('get_dashboard_stats');
-              if (!statsError && statsData) {
+              // Update "Welcome back, Admin Name"
+              const userSession = JSON.parse(localStorage.getItem('fnb_user'));
+              const welcomeHeader = document.querySelector('.page-title-block h1');
+              if (welcomeHeader && userSession && userSession.full_name) {
+                  welcomeHeader.innerHTML = `Welcome back, ${userSession.full_name.split(' ')[0]} 👋`;
+              }
+
+              // Fetch all active members to compute stats, Recent, and Expiring lists dynamically
+              const { data: members, error: membersErr } = await window.db.from('members').select(`
+                  id, custom_id, status, membership_start, membership_end, goal,
+                  users!inner(full_name, is_active),
+                  plans(name)
+              `).eq('users.is_active', true);
+
+              if (!membersErr && members) {
+                  // Compute dashboard stats dynamically from active members
+                  const totalMembers = members.length;
+                  const activeMembers = members.filter(m => m.status === 'active').length;
+                  const expiredMembers = members.filter(m => m.status !== 'active').length;
+
                   const totalEl = document.getElementById('stat-total-members');
                   const activeEl = document.getElementById('stat-active-members');
                   const expiredEl = document.getElementById('stat-expired-members');
 
-                  if (totalEl) totalEl.dataset.count = statsData.total_members;
-                  if (activeEl) activeEl.dataset.count = statsData.active_members;
-                  if (expiredEl) expiredEl.dataset.count = statsData.expired_members;
+                  if (totalEl) totalEl.dataset.count = totalMembers;
+                  if (activeEl) activeEl.dataset.count = activeMembers;
+                  if (expiredEl) expiredEl.dataset.count = expiredMembers;
                   
                   // Re-trigger counter animations for the first three cards
                   [totalEl, activeEl, expiredEl].forEach(el => {
@@ -136,21 +153,6 @@
                           animateCount(el, target, prefix, suffix);
                       }
                   });
-              }
-
-              // Update "Welcome back, Admin Name"
-              const userSession = JSON.parse(localStorage.getItem('fnb_user'));
-              const welcomeHeader = document.querySelector('.page-title-block h1');
-              if (welcomeHeader && userSession && userSession.full_name) {
-                  welcomeHeader.innerHTML = `Welcome back, ${userSession.full_name.split(' ')[0]} 👋`;
-              }
-
-              // 2. Fetch all members to compute Recent and Expiring lists dynamically
-              const { data: members, error: membersErr } = await window.db.from('members').select(`
-                  id, custom_id, status, membership_start, membership_end, goal,
-                  users(full_name),
-                  plans(name)
-              `);
 
               if (!membersErr && members) {
                   // A. RECENT MEMBERS (Top 5 sorted by start date)
