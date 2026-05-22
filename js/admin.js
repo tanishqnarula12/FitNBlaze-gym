@@ -154,7 +154,6 @@
                       }
                   });
 
-              if (!membersErr && members) {
                   // A. RECENT MEMBERS (Top 5 sorted by start date)
                   const recentTableBody = document.querySelector('.dashboard-2col .section-card:first-child tbody');
                   if (recentTableBody) {
