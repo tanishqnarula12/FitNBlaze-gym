@@ -150,10 +150,16 @@ DECLARE
     v_expired_members INTEGER;
     v_total_revenue NUMERIC;
 BEGIN
-    SELECT COUNT(*) INTO v_total_members FROM public.members;
-    SELECT COUNT(*) INTO v_active_members FROM public.members WHERE status = 'active';
-    SELECT COUNT(*) INTO v_expired_members FROM public.members WHERE status = 'expired' OR membership_end < CURRENT_DATE;
-    SELECT COALESCE(SUM(amount), 0) INTO v_total_revenue FROM public.payments WHERE status = 'paid';
+    -- Only count members whose user account is active
+    SELECT COUNT(*) INTO v_total_members FROM public.members m JOIN public.users u ON m.user_id = u.id WHERE u.is_active = true;
+    SELECT COUNT(*) INTO v_active_members FROM public.members m JOIN public.users u ON m.user_id = u.id WHERE u.is_active = true AND m.status = 'active';
+    SELECT COUNT(*) INTO v_expired_members FROM public.members m JOIN public.users u ON m.user_id = u.id WHERE u.is_active = true AND (m.status = 'expired' OR m.membership_end < CURRENT_DATE);
+    -- Only count revenue from payments linked to active members
+    SELECT COALESCE(SUM(p.amount), 0) INTO v_total_revenue
+    FROM public.payments p
+    JOIN public.members m ON p.member_id = m.id
+    JOIN public.users u ON m.user_id = u.id
+    WHERE p.status = 'paid' AND u.is_active = true;
 
     RETURN json_build_object(
         'total_members', v_total_members,

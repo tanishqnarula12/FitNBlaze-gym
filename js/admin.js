@@ -528,42 +528,72 @@
 
           // --- PAYMENTS TABLE ---
           else if (currentPage === 'payments.html') {
-              const { data, error } = await window.db.from('payments').select(`
-                  id, amount, payment_method, status, paid_at, transaction_reference,
-                  members(custom_id, users(full_name)),
-                  plans(name)
-              `).order('paid_at', { ascending: false });
+              // First, get all active member IDs (members whose users are still active)
+              const { data: activeMembers, error: activeMembersErr } = await window.db
+                  .from('members')
+                  .select('id, custom_id, users!inner(full_name, is_active)')
+                  .eq('users.is_active', true);
 
-              if (!error && data && tbody) {
+              // Build a lookup map of active member IDs for quick filtering
+              const activeMemberIds = (activeMembers || []).map(m => m.id);
+              const memberLookup = {};
+              (activeMembers || []).forEach(m => {
+                  memberLookup[m.id] = {
+                      custom_id: m.custom_id,
+                      full_name: m.users?.full_name || 'Unknown'
+                  };
+              });
+
+              // Fetch only payments belonging to active members
+              let payments = [];
+              let paymentsError = null;
+
+              if (activeMemberIds.length > 0) {
+                  const result = await window.db.from('payments').select(`
+                      id, amount, payment_method, status, paid_at, transaction_reference,
+                      member_id,
+                      plans(name)
+                  `).in('member_id', activeMemberIds).order('paid_at', { ascending: false });
+                  payments = result.data || [];
+                  paymentsError = result.error;
+              }
+
+              if (!paymentsError && tbody) {
                   tbody.innerHTML = '';
-                  data.forEach(p => {
-                      const name = p.members?.users?.full_name || 'Unknown';
-                      let badge = 'badge-pending';
-                      if(p.status === 'paid') badge = 'badge-paid';
-                      if(p.status === 'failed') badge = 'badge-failed';
-                      
-                      tbody.innerHTML += `
-                          <tr>
-                              <td class="member-id" style="font-family:monospace;font-size:12px;">${p.transaction_reference || 'N/A'}</td>
-                              <td class="member-name"><div style="font-weight:600;">${name}</div><div style="font-size:11px;color:#666;">${p.members?.custom_id}</div></td>
-                              <td><span class="plan-tag">${p.plans?.name || 'N/A'}</span></td>
-                              <td class="fw-600 text-accent">₹${p.amount.toLocaleString('en-IN')}</td>
-                              <td class="text-muted" style="text-transform:capitalize;">${p.payment_method}</td>
-                              <td><span class="badge ${badge}">${p.status.toUpperCase()}</span></td>
-                              <td class="text-muted">${new Date(p.paid_at).toLocaleDateString('en-IN', {month:'short', day:'numeric', year:'numeric'})}</td>
-                          </tr>`;
-                  });
+                  if (payments.length === 0) {
+                      tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#666;padding:20px;">No transactions found.</td></tr>';
+                  } else {
+                      payments.forEach(p => {
+                          const memberInfo = memberLookup[p.member_id] || {};
+                          const name = memberInfo.full_name || 'Unknown';
+                          const customId = memberInfo.custom_id || 'N/A';
+                          let badge = 'badge-pending';
+                          if(p.status === 'paid') badge = 'badge-paid';
+                          if(p.status === 'failed') badge = 'badge-failed';
+                          
+                          tbody.innerHTML += `
+                              <tr>
+                                  <td class="member-id" style="font-family:monospace;font-size:12px;">${p.transaction_reference || 'N/A'}</td>
+                                  <td class="member-name"><div style="font-weight:600;">${name}</div><div style="font-size:11px;color:#666;">${customId}</div></td>
+                                  <td><span class="plan-tag">${p.plans?.name || 'N/A'}</span></td>
+                                  <td class="fw-600 text-accent">₹${p.amount.toLocaleString('en-IN')}</td>
+                                  <td class="text-muted" style="text-transform:capitalize;">${p.payment_method}</td>
+                                  <td><span class="badge ${badge}">${p.status.toUpperCase()}</span></td>
+                                  <td class="text-muted">${p.paid_at ? new Date(p.paid_at).toLocaleDateString('en-IN', {month:'short', day:'numeric', year:'numeric'}) : 'N/A'}</td>
+                              </tr>`;
+                      });
+                  }
 
                   // Update footer count
                   const countEl = document.getElementById('paymentsCount');
-                  if (countEl) countEl.textContent = `Showing ${data.length} transactions`;
+                  if (countEl) countEl.textContent = `Showing ${payments.length} transactions`;
 
                   // Update stat cards dynamically
                   const statCards = document.querySelectorAll('.stat-value');
                   if (statCards.length >= 4) {
-                      const paidTx = data.filter(p => p.status === 'paid');
-                      const pendingTxCount = data.filter(p => p.status === 'pending').length;
-                      const failedTxCount = data.filter(p => p.status === 'failed').length;
+                      const paidTx = payments.filter(p => p.status === 'paid');
+                      const pendingTxCount = payments.filter(p => p.status === 'pending').length;
+                      const failedTxCount = payments.filter(p => p.status === 'failed').length;
                       const totalRev = paidTx.reduce((sum, p) => sum + Number(p.amount), 0);
 
                       statCards[0].textContent = `₹${totalRev.toLocaleString('en-IN')}`;
